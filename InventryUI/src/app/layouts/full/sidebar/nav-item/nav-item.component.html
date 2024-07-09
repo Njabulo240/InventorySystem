@@ -1,0 +1,21 @@
+<div mat-subheader *ngIf="item.navCap" class="nav-caption">
+  {{ item.navCap }}
+</div>
+<a
+  mat-list-item
+  (click)="onItemSelected(item)"
+  [ngClass]="{
+    'mat-toolbar mat-primary activeMenu': item.route
+      ? router.isActive(item.route, true)
+      : false,
+  }"
+  class="menu-list-item"
+  *ngIf="!item.navCap"
+>
+  <i-tabler
+    class="routeIcon"
+    name="{{ item.iconName }}"
+    matListItemIcon
+  ></i-tabler>
+  <span class="hide-menu">{{ item.displayName }}</span>
+</a>

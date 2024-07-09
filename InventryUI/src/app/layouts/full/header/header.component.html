@@ -1,0 +1,48 @@
+<mat-toolbar class="topbar">
+  <!-- Mobile Menu -->
+  <button mat-icon-button (click)="toggleMobileNav.emit()" *ngIf="!showToggle">
+    <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
+  </button>
+
+  <span class="flex-1-auto"></span>
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- profile Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="profilemenu"
+    aria-label="Notifications"
+  >
+    <img
+      src="../../../../assets/images/logos/user.jpg"
+      class="rounded-circle object-cover"
+      width="35"
+    />
+  </button>
+  <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
+    <mat-list-item>
+      <span matListItemTitle class="f-s-16 f-w-600">{{userName}}/{{userRole}}</span>
+      <span matListItemLine class="mat-body-1">{{email}}</span>
+    </mat-list-item>
+    <button mat-menu-item  (click)="ChangePassword()">
+      <mat-icon class="d-flex align-items-center"
+        ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
+       
+      >
+      Change password
+    </button>
+
+
+    <div class="p-x-12 m-t-12">
+      <a
+      (click)="logout()"
+        mat-stroked-button
+        color="primary"
+        class="w-100"
+        >Logout</a
+      >
+    </div>
+  </mat-menu>
+</mat-toolbar>

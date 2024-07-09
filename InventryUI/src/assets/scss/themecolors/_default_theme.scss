@@ -1,0 +1,60 @@
+$mat-primary: (
+  100: white,
+  500: #5d87ff,
+  700: #5d87ff,
+  contrast: (
+    100: white,
+    500: white,
+    700: white,
+  ),
+);
+$mat-secondary: (
+  100: white,
+  500: #44b7f7,
+  700: #5d87ff,
+  contrast: (
+    100: white,
+    500: white,
+    700: white,
+  ),
+);
+
+$mat-warn: (
+  100: FDEDE8,
+  500: #fa896b,
+  700: #f3704d,
+  contrast: (
+    100: white,
+    500: white,
+    700: white,
+  ),
+);
+
+$theme-primary: mat.define-palette($mat-primary, 500);
+$theme-accent: mat.define-palette($mat-secondary, 500);
+$theme-warn: mat.define-palette($mat-warn, 500);
+
+$bluetheme: mat.define-light-theme(
+  (
+    color: (
+      primary: $theme-primary,
+      accent: $theme-accent,
+      warn: $theme-warn,
+    ),
+    typography:
+      mat.define-typography-config(
+        $font-family: "Plus Jakarta Sans",
+        $subtitle-2: mat.define-typography-level(14px, 14px, 400),
+        $subtitle-1: mat.define-typography-level(21px, 26px, 500),
+        $headline-6: mat.define-typography-level(18px, 26px, 600),
+        $headline-5: mat.define-typography-level(24px, 30px, 700),
+        $button: mat.define-typography-level(14px, 14px, 400),
+        $body-1: mat.define-typography-level(14px, 20px, 400),
+        $body-2: mat.define-typography-level(16px, 22px, 400),
+      ),
+  )
+);
+
+.bg-primary {
+  background: mat.get-color-from-palette($theme-primary, 500) !important;
+}

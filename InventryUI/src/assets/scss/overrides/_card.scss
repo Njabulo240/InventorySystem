@@ -1,0 +1,73 @@
+// card
+.mat-mdc-card {
+  margin-bottom: 20px;
+  border-radius: $border-radius;
+}
+
+.modal-card{
+  margin-bottom: 0px;
+}
+.mat-mdc-card-header {
+  padding: 24px 24px 0;
+}
+
+.mat-mdc-card-content {
+  padding: 0 24px;
+}
+
+.mat-mdc-card {
+  background-color: $cardbg;
+}
+
+.cardWithShadow {
+  box-shadow: $cardshadow !important;
+}
+
+.mat-mdc-card-title {
+  line-height: 1.6rem;
+}
+
+.mdc-card__actions {
+  padding: 24px;
+}
+
+.theme-card.mat-mdc-card {
+  .mat-mdc-card-header {
+    padding: 16px 24px;
+  }
+  .mat-mdc-card-content {
+    padding: 24px;
+  }
+}
+
+
+// chip
+.mat-mdc-chip {
+  height: 24px;
+  font-size: 14px;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bg1 {
+  background-color: rgba(255, 153, 153, 0.2); 
+}
+
+.bg2 {
+  background-color: rgba(153, 204, 255, 0.2); 
+}
+
+.bg3 {
+  background-color: rgba(204, 153, 204, 0.2); 
+}
+
+.bg4 {
+  background-color: rgba(153, 204, 153, 0.2); 
+}
+
+
+

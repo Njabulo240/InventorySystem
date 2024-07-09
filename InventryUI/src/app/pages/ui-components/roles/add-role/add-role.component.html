@@ -1,0 +1,24 @@
+<mat-card class="cardWithShadow theme-card modal-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Create role</mat-card-title>
+    <span class="flex-1-auto"></span>
+    <button mat-flat-button  matTooltipPosition="left" class="m-l-8" matTooltipHideDelay="100000"
+      (click)="closeModal()">
+      <mat-icon color="warn">close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form [formGroup]="dataForm" autocomplete="off" novalidate (ngSubmit)="createData(dataForm.value)">
+
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Role Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+
+      <button mat-flat-button color="primary" [disabled]="!dataForm.valid">
+        Save
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

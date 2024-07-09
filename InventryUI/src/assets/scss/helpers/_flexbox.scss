@@ -1,0 +1,31 @@
+@use 'variables';
+
+$utilities: (
+  'flex': (
+    property: flex,
+    class: flex,
+    values: (fill: 1 1 auto)
+  ),
+  'justify-content': (
+    property: justify-content,
+    class: justify-content,
+    values: (
+      start: flex-start,
+      end: flex-end,
+      center: center,
+      between: space-between,
+      around: space-around,
+    )
+  ),
+  'align-items': (
+    property: align-items,
+    class: align-items,
+    values: (
+      start: flex-start,
+      end: flex-end,
+      center: center,
+      baseline: baseline,
+      stretch: stretch,
+    )
+  ),
+);

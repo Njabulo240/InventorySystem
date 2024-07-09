@@ -1,0 +1,84 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">User roles</mat-card-title>
+    <span class="flex-1-auto"></span>
+    <button
+    mat-flat-button
+    color="primary"
+    matTooltipPosition="left"
+    class="m-l-8"
+    matTooltipHideDelay="100000"
+    (click)="addRole()"
+    >
+    <mat-icon>add</mat-icon>Create new role
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="b-t-1">
+
+            <div class="table-responsive m-t-16">
+              <table mat-table [dataSource]="dataSource" class="w-100">
+
+                <ng-container matColumnDef="action">
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    class="f-w-600 mat-subtitle-1 f-s-14"
+                  >
+                  Action
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="mat-body-1">
+                    <button
+                    mat-flat-button
+                    color="primary"
+                    [matMenuTriggerFor]="actions"
+                    class="m-t-8"
+                  >
+                    Action <mat-icon>arrow_drop_down</mat-icon>
+                  </button>
+                  <mat-menu class="cardWithShadow" #actions="matMenu">
+                    <button mat-menu-item (click)="UpdateRole(element.id)">
+                      Edit
+                    </button>
+                    <button mat-menu-item (click)="DeleteRole(element.id)">
+                     Delete
+                    </button>
+                  </mat-menu>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="role">
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    class="f-w-600 mat-subtitle-1 f-s-14"
+                  >
+                  Role Name
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="mat-body-1">
+                    {{ element.name}}
+                  </td>
+                </ng-container>
+        <ng-container matColumnDef="date">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            class="f-w-600 mat-subtitle-1 f-s-14"
+          >
+          Creation time
+          </th>
+          <td mat-cell *matCellDef="let element" class="mat-body-1">
+            {{ element.dateCreated | date: 'medium'}}
+          </td>
+        </ng-container>
+            
+    
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
+            </div>
+     
+  </mat-card-content>
+</mat-card>
+

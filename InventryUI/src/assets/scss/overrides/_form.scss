@@ -1,0 +1,29 @@
+// for radius
+
+.mdc-text-field--outlined {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__notch {
+    border-color: $borderColor !important;
+  }
+
+  .mdc-notched-outline .mdc-notched-outline__leading {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+
+  .mdc-notched-outline .mdc-notched-outline__trailing {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+}
+
+.mdc-form-field > label {
+  font-size: 14px;
+}
+
+.hide-hint {
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}

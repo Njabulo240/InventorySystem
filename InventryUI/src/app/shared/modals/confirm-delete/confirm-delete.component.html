@@ -1,0 +1,21 @@
+<div class="app-popup">
+  <div class="app-popup-content text-center">
+    <div class="mb-4">
+      <h4>{{data.message}}</h4>
+    </div>
+
+  
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-flat-button color="warn" class="m-t-8 mr-2" [mat-dialog-close]="false">
+        No
+      </button>
+    
+      <div fxFlex="10px"></div> 
+    
+      <button mat-flat-button color="primary" class="m-t-8" [mat-dialog-close]="true">
+        Yes
+      </button>
+    </div>
+  
+  </div>
+</div>

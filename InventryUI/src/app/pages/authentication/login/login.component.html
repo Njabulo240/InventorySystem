@@ -1,0 +1,46 @@
+<div class="blank-layout-container justify-content-center align-items-center bg-light-primary">
+  <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
+    <div class="col-lg-4 d-flex align-items-center">
+      <mat-card class="cardWithShadow boxed-auth">
+        <mat-card-content class="p-32">
+          <div class="text-center">
+            <h1> Inventry System</h1>
+          </div>
+
+          <div *ngIf="showError">
+            <mat-error>{{errorMessage}}</mat-error>
+          </div>
+          <mat-card-title>Log in</mat-card-title>
+          <form class="m-t-30" [formGroup]="loginForm" autocomplete="off" novalidate
+            (ngSubmit)="loginUser(loginForm.value)">
+
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="text" id="username" formControlName="username" class="form-control" />
+            </mat-form-field>
+
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Password</mat-label>
+            <mat-form-field appearance="outline" class="w-100 position-relative" color="primary">
+              <div class="password-container">
+                <input matInput [type]="hidePassword ? 'password' : 'text'" id="password" formControlName="password"
+                  class="form-control" />
+                <div class="password-toggle-button" (click)="togglePasswordVisibility()">
+                  <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </div>
+              </div>
+            </mat-form-field>
+
+            <div class="d-flex align-items-center m-b-12">
+              <a [routerLink]="['/authentication/forgot-password']"
+                class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14">Forgot Password ?</a>
+            </div>
+
+            <button mat-flat-button color="primary" class="w-100" type="submit" [disabled]="!loginForm.valid">
+              Sign In
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+.blank-layout-container {
+  height: 100vh;
+  display: flex;
+  background-size: cover;
+  align-items: center;
+}
+
+.auth-title {
+  font-size: 36px;
+  line-height: 44px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+.img-height {
+  height: calc(100vh - 83px);
+}
+
+.custom-row {
+  &.row {
+    margin-right: -8px;
+    margin-left: -8px;
+    .col-2,
+    .col-12 {
+      padding-right: 8px;
+      padding-left: 8px;
+    }
+  }
+}
+
+.or-border {
+  position: relative;
+  text-align: center;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100px;
+    top: 50%;
+    height: 1px;
+    background: $borderColor;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 100px;
+    top: 50%;
+    height: 1px;
+    background: $borderColor;
+  }
+}
+
+.boxed-auth {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.max-width-form {
+  max-width: 450px;
+}
+.success-tick {
+  width: 50px; 
+  height: 50px; 
+}
+.mb-4{
+  margin: 1rem;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+}
+
+.password-toggle-button {
+  margin-left: 8px; 
+}

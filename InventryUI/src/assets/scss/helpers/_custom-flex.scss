@@ -1,0 +1,15 @@
+@media (min-width: 1200px) {
+  body {
+    .d-lg-flex {
+      display: flex !important;
+    }
+
+    .align-items-lg-center {
+      align-items: center !important;
+    }
+  }
+}
+
+.flex-1-auto {
+  flex: 1 1 0%;
+}

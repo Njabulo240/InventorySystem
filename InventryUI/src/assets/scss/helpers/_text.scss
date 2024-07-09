@@ -1,0 +1,41 @@
+@use 'sass:map';
+@use 'variables';
+
+$utilities: (
+  'font-size': (
+    property: font-size,
+    class: f-s,
+    values: variables.$font-sizes
+  ),
+  'font-weight': (
+    property: font-weight,
+    class: f-w,
+    values: variables.$font-wieghts
+  ),
+  'text-align': (
+    property: text-align,
+    class: text,
+    values: center right left
+  ),
+  'text-transform': (
+    property: text-transform,
+    class: text,
+    values: capitalize uppercase lowercase
+  ),
+  'text-color': (
+    property: color,
+    class: text,
+    values: (
+      reset: inherit,
+      current: currentColor
+    )
+  )
+);
+
+.lh-lg {
+  line-height: 36px !important;
+}
+
+.lh-sm {
+  line-height: 20px !important;
+}
