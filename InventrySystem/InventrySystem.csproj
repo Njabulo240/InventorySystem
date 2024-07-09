@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EmailService\EmailService.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>
