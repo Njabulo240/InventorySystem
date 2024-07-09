@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventrySystem", "InventrySystem\InventrySystem.csproj", "{2EC78F78-4912-41F6-B655-C1E7C2C7B576}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventrySystem", "InventrySystem\InventrySystem.csproj", "{2EC78F78-4912-41F6-B655-C1E7C2C7B576}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{CE84C50C-89A1-425D-915E-26836BFCB981}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{CE84C50C-89A1-425D-915E-26836BFCB981}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{6C7ACC67-0EE5-4013-ADAD-6E62DF7A54A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{6C7ACC67-0EE5-4013-ADAD-6E62DF7A54A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{F5E29399-7A5E-41B5-AD4A-E91495E0BAF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{F5E29399-7A5E-41B5-AD4A-E91495E0BAF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailService", "EmailService\EmailService.csproj", "{86FBFDE5-E49B-43C0-90B8-B06526D7AC4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F5E29399-7A5E-41B5-AD4A-E91495E0BAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5E29399-7A5E-41B5-AD4A-E91495E0BAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5E29399-7A5E-41B5-AD4A-E91495E0BAF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86FBFDE5-E49B-43C0-90B8-B06526D7AC4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86FBFDE5-E49B-43C0-90B8-B06526D7AC4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86FBFDE5-E49B-43C0-90B8-B06526D7AC4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86FBFDE5-E49B-43C0-90B8-B06526D7AC4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
