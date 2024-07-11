@@ -2,6 +2,16 @@
 {
     public interface IRepositoryManager
     {
-        void Save();
+        IDeviceRepository Device { get; }
+        ICategoryRepository Category { get; }
+        IBrandRepository Brand { get; }
+        ISupplierRepository Supplier { get; }
+        IEmployeeRepository Employee { get; }
+        IOfficeRepository Office { get; }
+        IDeviceAssignmentRepository DeviceAssignment { get; }
+        IMaintenanceScheduleRepository MaintenanceSchedule { get; }
+        IServiceHistoryRepository ServiceHistory { get; }
+        IReportRepository Report { get; }
+        void SaveAsync();
     }
 }

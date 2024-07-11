@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace InventrySystem.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240711131827_InitialData2")]
+    partial class InitialData2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,48 +38,6 @@ namespace InventrySystem.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brands");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"),
-                            Name = "Apple"
-                        },
-                        new
-                        {
-                            Id = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
-                            Name = "Microsoft"
-                        },
-                        new
-                        {
-                            Id = new Guid("742229d4-eb49-4ded-8fc3-ee1fdf7d4157"),
-                            Name = "Google"
-                        },
-                        new
-                        {
-                            Id = new Guid("302a431a-2f54-4768-8a34-b6414f3909df"),
-                            Name = "Samsung"
-                        },
-                        new
-                        {
-                            Id = new Guid("14c1b3fb-57d0-48f5-aa4a-130a1ab629c0"),
-                            Name = "Dell"
-                        },
-                        new
-                        {
-                            Id = new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"),
-                            Name = "Lenovo"
-                        },
-                        new
-                        {
-                            Id = new Guid("ffb0451c-5f0b-457d-a513-e308e9b87326"),
-                            Name = "HP"
-                        },
-                        new
-                        {
-                            Id = new Guid("38fe8b3c-1f86-424a-857f-28b3d200adc3"),
-                            Name = "Cisco"
-                        });
                 });
 
             modelBuilder.Entity("Entities.Models.Category", b =>
@@ -92,48 +53,6 @@ namespace InventrySystem.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"),
-                            Name = "Laptops"
-                        },
-                        new
-                        {
-                            Id = new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"),
-                            Name = "Desktops"
-                        },
-                        new
-                        {
-                            Id = new Guid("f26edf00-3045-400e-94b4-95c1537adfc9"),
-                            Name = "Monitors"
-                        },
-                        new
-                        {
-                            Id = new Guid("3ae0f960-57a5-40b3-a1b6-b21e89b037f0"),
-                            Name = "Keyboards"
-                        },
-                        new
-                        {
-                            Id = new Guid("4b8fa9a2-f4ec-46d3-80e3-b0e6c0cc0fca"),
-                            Name = "Mice"
-                        },
-                        new
-                        {
-                            Id = new Guid("42a2b158-1964-47da-8c4e-31a249aa1b3a"),
-                            Name = "Printers"
-                        },
-                        new
-                        {
-                            Id = new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"),
-                            Name = "Routers"
-                        },
-                        new
-                        {
-                            Id = new Guid("d3d0e04f-640e-42bc-8f47-6c65362b0905"),
-                            Name = "Servers"
-                        });
                 });
 
             modelBuilder.Entity("Entities.Models.Device", b =>
@@ -171,28 +90,6 @@ namespace InventrySystem.Migrations
                     b.HasIndex("SupplierId");
 
                     b.ToTable("Devices");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("66cf9338-f525-492b-9c65-05f8af912a70"),
-                            BrandId = new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"),
-                            CategoryId = new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"),
-                            IsFaulty = false,
-                            Name = "Laptop X1",
-                            SerialNumber = "SN123456",
-                            SupplierId = new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0")
-                        },
-                        new
-                        {
-                            Id = new Guid("3d7081f8-6731-47c1-9668-d22e16426e39"),
-                            BrandId = new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"),
-                            CategoryId = new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"),
-                            IsFaulty = false,
-                            Name = "Desktop Y2",
-                            SerialNumber = "SN654321",
-                            SupplierId = new Guid("7360be35-feab-46c7-b250-bdf5f894bdc9")
-                        });
                 });
 
             modelBuilder.Entity("Entities.Models.DeviceAssignment", b =>
@@ -365,44 +262,6 @@ namespace InventrySystem.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d699d296-11ea-490f-af70-925cb1859a57"),
-                            ContactInfo = "Contact info for Cortex Technologies",
-                            Name = "Cortex Technologies Eswatini"
-                        },
-                        new
-                        {
-                            Id = new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8"),
-                            ContactInfo = "Contact info for CompuParts",
-                            Name = "CompuParts Eswatini"
-                        },
-                        new
-                        {
-                            Id = new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0"),
-                            ContactInfo = "Contact info for DataNet",
-                            Name = "DataNet Eswatini"
-                        },
-                        new
-                        {
-                            Id = new Guid("7360be35-feab-46c7-b250-bdf5f894bdc9"),
-                            ContactInfo = "Contact info for Vuna Technologies",
-                            Name = "Vuna Technologies"
-                        },
-                        new
-                        {
-                            Id = new Guid("029e2d94-fd9d-41bd-9b4a-58b2f738c662"),
-                            ContactInfo = "Contact info for Omega IT",
-                            Name = "Omega IT Eswatini"
-                        },
-                        new
-                        {
-                            Id = new Guid("915d6ff3-f98f-4430-9bdd-dd8f23107670"),
-                            ContactInfo = "Contact info for TelPro",
-                            Name = "TelPro Eswatini"
-                        });
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>
@@ -505,13 +364,13 @@ namespace InventrySystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "74c233b9-427c-4f2d-a7a8-f2b5a803f63d",
+                            Id = "fe2a2529-02ac-4fc7-9ff1-6be59d283e51",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "11761a83-c5e7-4b38-95f7-3e716b3e0d70",
+                            Id = "1d6aca4f-d7cf-499b-be6a-fbb368246e38",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

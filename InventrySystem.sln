@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailService", "EmailService\EmailService.csproj", "{86FBFDE5-E49B-43C0-90B8-B06526D7AC4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{AB0EE900-F3CC-4406-B367-27C956569648}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{AB0EE900-F3CC-4406-B367-27C956569648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{50169B78-F899-4B61-B543-8448F5764EF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{AB0EE900-F3CC-4406-B367-27C956569648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB0EE900-F3CC-4406-B367-27C956569648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB0EE900-F3CC-4406-B367-27C956569648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50169B78-F899-4B61-B543-8448F5764EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50169B78-F899-4B61-B543-8448F5764EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50169B78-F899-4B61-B543-8448F5764EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50169B78-F899-4B61-B543-8448F5764EF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
