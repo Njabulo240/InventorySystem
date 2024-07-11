@@ -1,5 +1,5 @@
 ﻿using Contracts;
-using Entities.Models;
+using Entities.Identity;
 using LoggerService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;

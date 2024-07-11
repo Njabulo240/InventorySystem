@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Entities.Identity;
 using Entities.Models;
 using Shared.DTO.Brand;
 using Shared.DTO.Category;

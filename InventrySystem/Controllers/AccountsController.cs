@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EmailService;
-using Entities.Models;
+using Entities.Identity;
 using InventrySystem.JwtFeatures;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
