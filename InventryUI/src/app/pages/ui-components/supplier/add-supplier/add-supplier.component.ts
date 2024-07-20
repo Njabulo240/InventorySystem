@@ -3,17 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { Role } from 'src/app/_interface/role.model';
+import { Supplier } from 'src/app/_interface/supplier';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 
 @Component({
-  selector: 'app-add-role',
-  templateUrl: './add-role.component.html',
+  selector: 'app-add-supplier',
+  templateUrl: './add-supplier.component.html',
+  styleUrls: ['./add-supplier.component.css']
 })
-export class AddRoleComponent implements OnInit {
-  public roleForm: FormGroup | any;
+export class AddSupplierComponent implements OnInit {
+
+  public supplierForm: FormGroup | any;
   public errorMessage: string = '';
   public bsModalRef?: BsModalRef;
 
@@ -25,50 +27,51 @@ export class AddRoleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.roleForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(50)])
+    this.supplierForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      contactInfo: new FormControl('', [Validators.maxLength(100)])
     });
   }
 
   validateControl = (controlName: string) => {
-    if (this.roleForm.get(controlName).invalid && this.roleForm.get(controlName).touched)
+    if (this.supplierForm.get(controlName).invalid && this.supplierForm.get(controlName).touched)
       return true;
     
     return false;
   }
 
   hasError = (controlName: string, errorName: string) => {
-    if (this.roleForm.get(controlName).hasError(errorName))
+    if (this.supplierForm.get(controlName).hasError(errorName))
       return true;
     
     return false;
   }
 
-  createRole = (roleFormValue: any) => {
-    if (this.roleForm.valid)
-      this.executeRoleCreation(roleFormValue);
+  createSupplier = (supplierFormValue: any) => {
+    if (this.supplierForm.valid)
+      this.executeSupplierCreation(supplierFormValue);
   }
 
-  private executeRoleCreation = (roleFormValue: any) => {
-    const role: any = {
-      name: roleFormValue.name
+  private executeSupplierCreation = (supplierFormValue: any) => {
+    const supplier: Supplier = {
+      name: supplierFormValue.name,
+      contactInfo: supplierFormValue.contactInfo
     };
 
-    console.log(role);
-    const apiUrl = 'api/roles';
-    this.repository.create(apiUrl, role)
+    const apiUrl = 'api/suppliers';
+    this.repository.create(apiUrl, supplier)
       .subscribe({
-        next: (createdRole: any) => {
+        next: (createdSupplier: any) => {
           const config: ModalOptions = {
             initialState: {
               modalHeaderText: 'Success Message',
-              modalBodyText: `Role: ${createdRole.name} created successfully`,
+              modalBodyText: `Supplier: ${createdSupplier.name} created successfully`,
               okButtonText: 'OK'
             }
           };
 
           this.bsModalRef = this.modal.show(SuccessModalComponent, config);
-          this.bsModalRef.content.redirectOnOk.subscribe((_: any) => this.redirectToRoleList());
+          this.bsModalRef.content.redirectOnOk.subscribe(() => this.redirectToSupplierList());
         },
         error: (err: HttpErrorResponse) => {
           this.errorHandler.handleError(err);
@@ -77,7 +80,8 @@ export class AddRoleComponent implements OnInit {
       });
   }
 
-  redirectToRoleList = () => {
-    this.router.navigate(['/ui-components/roles']);
+  redirectToSupplierList = () => {
+    this.router.navigate(['/ui-components/supplier']);
   }
+
 }

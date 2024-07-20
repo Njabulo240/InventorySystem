@@ -14,6 +14,12 @@ import { AddUserComponent } from './users/add-user/add-user.component';
 import { UpdateUserComponent } from './users/update-user/update-user.component';
 import { AddRoleComponent } from './roles/add-role/add-role.component';
 import { UpdateRoleComponent } from './roles/update-role/update-role.component';
+import { BrandComponent } from './brand/brand.component';
+import { AddBrandComponent } from './brand/add-brand/add-brand.component';
+import { UpdateBrandComponent } from './brand/update-brand/update-brand.component';
+import { SupplierComponent } from './supplier/supplier.component';
+import { AddSupplierComponent } from './supplier/add-supplier/add-supplier.component';
+import { UpdateSupplierComponent } from './supplier/update-supplier/update-supplier.component';
 
 @NgModule({
   imports: [
@@ -39,6 +45,12 @@ import { UpdateRoleComponent } from './roles/update-role/update-role.component';
     UpdateUserComponent,
     AddRoleComponent,
     UpdateRoleComponent,
+    BrandComponent,
+    AddBrandComponent,
+    UpdateBrandComponent,
+    SupplierComponent,
+    AddSupplierComponent,
+    UpdateSupplierComponent
     
   ],
 })

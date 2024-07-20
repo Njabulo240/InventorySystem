@@ -11,7 +11,6 @@ namespace Shared.DTO.User
     {
         [Required(ErrorMessage = "Name is required")]
         public string? Name { get; set; }
-        public DateTime DateCreated { get; set; } = DateTime.Now;
     }
 
     public record UserRoleForUpdateDto

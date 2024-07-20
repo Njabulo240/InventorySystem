@@ -3,17 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { Role } from 'src/app/_interface/role.model';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 
 @Component({
-  selector: 'app-add-role',
-  templateUrl: './add-role.component.html',
+  selector: 'app-add-brand',
+  templateUrl: './add-brand.component.html',
+  styleUrls: ['./add-brand.component.css']
 })
-export class AddRoleComponent implements OnInit {
-  public roleForm: FormGroup | any;
+export class AddBrandComponent implements OnInit {
+  public brandForm: FormGroup | any;
   public errorMessage: string = '';
   public bsModalRef?: BsModalRef;
 
@@ -25,50 +25,50 @@ export class AddRoleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.roleForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(50)])
+    this.brandForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.maxLength(60)])
     });
   }
 
   validateControl = (controlName: string) => {
-    if (this.roleForm.get(controlName).invalid && this.roleForm.get(controlName).touched)
+    if (this.brandForm.get(controlName).invalid && this.brandForm.get(controlName).touched)
       return true;
     
     return false;
   }
 
   hasError = (controlName: string, errorName: string) => {
-    if (this.roleForm.get(controlName).hasError(errorName))
+    if (this.brandForm.get(controlName).hasError(errorName))
       return true;
     
     return false;
   }
 
-  createRole = (roleFormValue: any) => {
-    if (this.roleForm.valid)
-      this.executeRoleCreation(roleFormValue);
+  createBrand = (brandFormValue: any) => {
+    if (this.brandForm.valid)
+      this.executeBrandCreation(brandFormValue);
   }
 
-  private executeRoleCreation = (roleFormValue: any) => {
-    const role: any = {
-      name: roleFormValue.name
+  private executeBrandCreation = (brandFormValue: any) => {
+    const brand: any = {
+      name: brandFormValue.name
     };
 
-    console.log(role);
-    const apiUrl = 'api/roles';
-    this.repository.create(apiUrl, role)
+    console.log(brand);
+    const apiUrl = 'api/brands';
+    this.repository.create(apiUrl, brand)
       .subscribe({
-        next: (createdRole: any) => {
+        next: (createdBrand: any) => {
           const config: ModalOptions = {
             initialState: {
               modalHeaderText: 'Success Message',
-              modalBodyText: `Role: ${createdRole.name} created successfully`,
+              modalBodyText: `Brand: ${createdBrand.name} created successfully`,
               okButtonText: 'OK'
             }
           };
 
           this.bsModalRef = this.modal.show(SuccessModalComponent, config);
-          this.bsModalRef.content.redirectOnOk.subscribe((_: any) => this.redirectToRoleList());
+          this.bsModalRef.content.redirectOnOk.subscribe((_: any) => this.redirectToBrandList());
         },
         error: (err: HttpErrorResponse) => {
           this.errorHandler.handleError(err);
@@ -77,7 +77,8 @@ export class AddRoleComponent implements OnInit {
       });
   }
 
-  redirectToRoleList = () => {
-    this.router.navigate(['/ui-components/roles']);
+  redirectToBrandList = () => {
+    this.router.navigate(['/ui-components/brand']);
   }
+
 }

@@ -29,7 +29,9 @@
               "src/assets/scss/style.scss",
               "node_modules/ngx-spinner/animations/ball-clip-rotate.css",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [

@@ -25,15 +25,20 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Brand',
     iconName: 'list',
-    route: '/inventory/brand',
+    route: '/ui-components/brand',
   },
   {
     displayName: 'Suppliers',
-    iconName: 'storefront',
-    route: '/inventory/suppliers',
+    iconName: 'calendar',
+    route: '/ui-components/supplier',
   },
   {
     navCap: 'User Management',
+  },
+  {
+    displayName: 'Roles',
+    iconName: 'user-check',
+    route: '/ui-components/roles',
   },
   {
     displayName: 'User',
