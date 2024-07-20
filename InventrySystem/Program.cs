@@ -19,6 +19,7 @@ builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.AddScoped<JwtHandler>();
 builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureSwagger();
+builder.Services.AddAuthentication();
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
     opt.TokenLifespan = TimeSpan.FromHours(2));
@@ -37,6 +38,7 @@ app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.UseSwagger();

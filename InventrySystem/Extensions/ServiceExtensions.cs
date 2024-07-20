@@ -40,7 +40,7 @@ namespace InventrySystem.Extensions
 
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentity<User, IdentityRole>(o =>
+            var builder = services.AddIdentity<User, UserRole>(o =>
             {
                 o.Password.RequireDigit = true;
                 o.Password.RequireLowercase = false;

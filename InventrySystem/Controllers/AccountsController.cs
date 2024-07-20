@@ -141,5 +141,45 @@ namespace InventrySystem.Controllers
             return Ok();
         }
 
+
+        [HttpGet("users")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = _userManager.Users.ToList();
+            return Ok(users);
+        }
+
+        [HttpPut("users/{userId}/roles")]
+        public async Task<IActionResult> UpdateUserRoles(string userId, [FromBody] List<string> roles)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound("User not found");
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var result = await _userManager.RemoveFromRolesAsync(user, userRoles);
+            if (!result.Succeeded)
+                return BadRequest("Failed to remove user roles");
+
+            result = await _userManager.AddToRolesAsync(user, roles);
+            if (!result.Succeeded)
+                return BadRequest("Failed to add user roles");
+
+            return Ok("User roles updated successfully");
+        }
+
+        [HttpDelete("users/{userId}")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound("User not found");
+
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+                return BadRequest("Failed to delete user");
+
+            return Ok("User deleted successfully");
+        }
     }
 }
