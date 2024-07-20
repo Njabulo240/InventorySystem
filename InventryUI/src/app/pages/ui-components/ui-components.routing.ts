@@ -8,6 +8,9 @@ import { UpdateBrandComponent } from './brand/update-brand/update-brand.componen
 import { SupplierComponent } from './supplier/supplier.component';
 import { AddSupplierComponent } from './supplier/add-supplier/add-supplier.component';
 import { UpdateSupplierComponent } from './supplier/update-supplier/update-supplier.component';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { UpdateCategoryComponent } from './category/update-category/update-category.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -22,6 +25,9 @@ export const UiComponentsRoutes: Routes = [
       {path: 'supplier',component: SupplierComponent, },
       { path: 'add-supplier', component: AddSupplierComponent },
       { path: 'update-supplier/:id', component: UpdateSupplierComponent },
+      {path: 'category',component: CategoryComponent, },
+      { path: 'add-category', component: AddCategoryComponent },
+      { path: 'update-category/:id', component: UpdateCategoryComponent },
     ],
   },
 ];

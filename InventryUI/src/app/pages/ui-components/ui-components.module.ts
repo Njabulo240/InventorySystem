@@ -20,6 +20,9 @@ import { UpdateBrandComponent } from './brand/update-brand/update-brand.componen
 import { SupplierComponent } from './supplier/supplier.component';
 import { AddSupplierComponent } from './supplier/add-supplier/add-supplier.component';
 import { UpdateSupplierComponent } from './supplier/update-supplier/update-supplier.component';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { UpdateCategoryComponent } from './category/update-category/update-category.component';
 
 @NgModule({
   imports: [
@@ -50,7 +53,10 @@ import { UpdateSupplierComponent } from './supplier/update-supplier/update-suppl
     UpdateBrandComponent,
     SupplierComponent,
     AddSupplierComponent,
-    UpdateSupplierComponent
+    UpdateSupplierComponent,
+    CategoryComponent,
+    AddCategoryComponent,
+    UpdateCategoryComponent
     
   ],
 })

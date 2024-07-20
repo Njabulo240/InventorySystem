@@ -1,0 +1,22 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%" class="b-1 shadow-none">
+    <mat-card-header>
+      <mat-card-title>Update category</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="categoryForm" autocomplete="off" novalidate (ngSubmit)="updateCategory(categoryForm.value)">
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="Category name" formControlName="name" id="name">
+          <mat-hint align="end">Not more than 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" class="w-100 action-button" [disabled]="!categoryForm.valid">Update</button>
+        <button type="button" mat-flat-button color="warn" class="w-100" (click)="redirectToCategoryList()">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
+

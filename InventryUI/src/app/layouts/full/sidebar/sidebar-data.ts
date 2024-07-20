@@ -20,7 +20,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Category',
     iconName: 'rosette',
-    route: '/inventory/category',
+    route: '/ui-components/category',
   },
   {
     displayName: 'Brand',
