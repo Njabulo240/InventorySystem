@@ -1,0 +1,64 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%" class="b-1 shadow-none">
+    <mat-card-header>
+      <mat-card-title>Update Device</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="deviceForm" autocomplete="off" novalidate (ngSubmit)="updateDevice(deviceForm.value)">
+      <mat-card-content>
+        <!-- Name Input -->
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="Device name" formControlName="name" id="name">
+          <mat-hint align="end">Not more than 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <!-- Serial Number Input -->
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="Serial number" formControlName="serialNumber" id="serialNumber">
+          <mat-hint align="end">Not more than 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('serialNumber', 'required')">Serial Number is required</mat-error>
+          <mat-error *ngIf="hasError('serialNumber', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <!-- Category Dropdown -->
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <mat-select placeholder="Select Category" formControlName="categoryId" id="categoryId">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('categoryId', 'required')">Category is required</mat-error>
+        </mat-form-field>
+
+        <!-- Brand Dropdown -->
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <mat-select placeholder="Select Brand" formControlName="brandId" id="brandId">
+            <mat-option *ngFor="let brand of brands" [value]="brand.id">
+              {{ brand.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('brandId', 'required')">Brand is required</mat-error>
+        </mat-form-field>
+
+        <!-- Supplier Dropdown -->
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <mat-select placeholder="Select Supplier" formControlName="supplierId" id="supplierId">
+            <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
+              {{ supplier.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('supplierId', 'required')">Supplier is required</mat-error>
+        </mat-form-field>
+
+        <!-- Is Faulty Checkbox -->
+        <mat-checkbox formControlName="isFaulty">Is Faulty</mat-checkbox>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" class="w-100 action-button" [disabled]="!deviceForm.valid">Update Device</button>
+        <button type="button" mat-flat-button color="warn" class="w-100" (click)="redirectToDeviceList()">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
+

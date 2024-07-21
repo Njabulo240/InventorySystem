@@ -26,6 +26,8 @@ namespace InventrySystem
                 .ForMember(d => d.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
                 .ForMember(d => d.BrandName, opt => opt.MapFrom(src => src.Brand.Name))
                 .ForMember(d => d.SupplierName, opt => opt.MapFrom(src => src.Supplier.Name));
+            CreateMap<DeviceForCreationDto, Device>();
+            CreateMap<DeviceForUpdateDto, Device>();
 
             CreateMap<Category, CategoryDto>();
             CreateMap<CategoryForCreationDto, Category>();

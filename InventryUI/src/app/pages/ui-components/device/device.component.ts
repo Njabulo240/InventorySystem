@@ -29,6 +29,7 @@ export class DeviceComponent implements OnInit,AfterViewInit {
   public displayedColumns = ['name', 'serialNumber', 'categoryName', 'brandName', 'supplierName', 'isFaulty', 'actions'];
   public dataSource = new MatTableDataSource<Device>();
   private allDevices: Device[] = [];
+  public bsModalRef?: BsModalRef;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -109,7 +110,7 @@ export class DeviceComponent implements OnInit,AfterViewInit {
   }
 
   public redirectToUpdate(id: string) {
-   // this.router.navigate([`/ui-components/update-device/${id}`]);
+   this.router.navigate([`/ui-components/update-device/${id}`]);
   }
 
   ngAfterViewInit() {
@@ -117,27 +118,27 @@ export class DeviceComponent implements OnInit,AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  // public deleteDevice = (id: string) => {
-  //   this.dialogService.openConfirmDialog('Are you sure you want to delete this device?')
-  //     .afterClosed()
-  //     .subscribe(res => {
-  //       if (res) {
-  //         this.repoService.delete(`api/devices/${id}`).subscribe(() => {
-  //           const config: ModalOptions = {
-  //             initialState: {
-  //               modalHeaderText: 'Success Message',
-  //               modalBodyText: `Device deleted successfully`,
-  //               okButtonText: 'OK'
-  //             }
-  //           };
+  public deleteDevice = (id: string) => {
+    this.dialogService.openConfirmDialog('Are you sure you want to delete this device?')
+      .afterClosed()
+      .subscribe(res => {
+        if (res) {
+          this.repoService.delete(`api/devices/${id}`).subscribe(() => {
+            const config: ModalOptions = {
+              initialState: {
+                modalHeaderText: 'Success Message',
+                modalBodyText: `Device deleted successfully`,
+                okButtonText: 'OK'
+              }
+            };
 
-  //           this.bsModalRef = this.modal.show(SuccessModalComponent, config);
-  //           this.bsModalRef.content.redirectOnOk.subscribe(() => 
-  //             this.getAllDevices()
+            this.bsModalRef = this.modal.show(SuccessModalComponent, config);
+            this.bsModalRef.content.redirectOnOk.subscribe(() => 
+              this.getAllDevices()
             
-  //           );
-  //         });
-  //       }
-  //     });
-  // }
+            );
+          });
+        }
+      });
+  }
 }
