@@ -55,7 +55,6 @@ namespace Shared.DTO.Device
         public string? CategoryName { get; set; }
         public Guid BrandId { get; set; }
         public string? BrandName { get; set; }
-
         public Guid SupplierId { get; set; }
         public string? SupplierName { get; set; }
         public bool IsFaulty { get; set; }
