@@ -43,7 +43,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'User',
     iconName: 'user-check',
-    route: '/user-management/user',
+    route: '/ui-components/user',
   },
   {
     navCap: 'Device Assignment',

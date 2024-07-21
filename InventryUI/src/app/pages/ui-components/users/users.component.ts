@@ -11,80 +11,89 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/shared/services/data.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
+import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html'
 })
 export class UsersComponent implements OnInit, AfterViewInit{
-
-  displayedColumns: string[] = ['action', 'username', 'name', 'surname','roles','email','emailconfirm'];
+  public errorMessage: string = '';
+  public bsModalRef?: BsModalRef;
+  public displayedColumns = ['userName', 'firstName', 'lastName', 'email', 'update', 'delete'];
   public dataSource = new MatTableDataSource<UserDto>();
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  private refreshSubscription!: Subscription;
-  constructor(    
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(
     private repoService: RepositoryService,
-    private dialog: MatDialog,
+    private errorService: RepositoryErrorHandlerService,
+    private router: Router,
     private dialogserve: DialogService,
-    private dataService: DataService,) {
-      this.refreshSubscription = this.dataService.refreshTab1$.subscribe(() => {
-        this.getUsers();
+    private modal: BsModalService
+  ) { }
+
+  ngOnInit(): void {
+    this.getAllUsers();
+  }
+
+  public getAllUsers = () => {
+    this.repoService.getData('api/accounts/users')
+      .subscribe({
+        next: (data: UserDto[] |any) => {
+          this.dataSource.data = data;
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errorService.handleError(error);
+          this.errorMessage = this.errorService.errorMessage;
+        }
       });
-    }
-    
-    ngOnInit(): void {
-      this.getUsers();
-    }
-  
-    public getUsers(){
-      this.repoService.getData('api/users')
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
+  public redirectToUpdate = (id: string) => {
+    this.router.navigate([`/ui-components/update-user/${id}`]);
+  }
+
+  public deleteUser = (id: string) => {
+    this.dialogserve.openConfirmDialog('Are you sure you want to delete this user?')
+      .afterClosed()
       .subscribe(res => {
-        this.dataSource.data = res as UserDto[]; 
-      },
-      (err) => {
-       console.log(err)
-      })
-    }
+        if (res) {
+          const deleteUri: string = `api/accounts/${id}`;
+          this.repoService.delete(deleteUri)
+            .subscribe({
+              next: () => {
+                const config: ModalOptions = {
+                  initialState: {
+                    modalHeaderText: 'Success Message',
+                    modalBodyText: 'User deleted successfully',
+                    okButtonText: 'OK'
+                  }
+                };
 
-
-    addUser() {
-      const popup = this.dialog.open(AddUserComponent, {
-        width: '500px', height: '570px',
-        enterAnimationDuration: '100ms',
-        exitAnimationDuration: '100ms',
+                this.bsModalRef = this.modal.show(SuccessModalComponent, config);
+                this.bsModalRef.content.redirectOnOk.subscribe(() => this.getAllUsers());
+              },
+              error: (error: HttpErrorResponse) => {
+                this.errorService.handleError(error);
+                this.errorMessage = this.errorService.errorMessage;
+              }
+            });
+        }
       });
-    }
-
-    updateUser(id: string) {
-      const popup = this.dialog.open(UpdateUserComponent, {
-        width: '500px', height: '567px',
-        enterAnimationDuration: '100ms',
-        exitAnimationDuration: '100ms',
-        data:{
-          id:id
-         }
-      });
-    }
-
-
-    DeleteUser(id: any) {
-      this.dialogserve.openConfirmDialog('Are you sure, you want to delete the user ?')
-        .afterClosed()
-        .subscribe(   (res) => {
-          if (res) {
-
-          }
-        });
-    }
-
-
-    ngAfterViewInit(): void {
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    }
-    public doFilter = (value: string) => {
-      this.dataSource.filter = value.trim().toLocaleLowerCase();
-    }
+  }
 }

@@ -72,8 +72,6 @@ export interface UserRoleDto {
     firstName?: string;
     lastName?: string;
     email?: string;
-    emailConfirmed?: string;
-    roles?: string[];
   }
 
   export interface UserRoleCreationDto {

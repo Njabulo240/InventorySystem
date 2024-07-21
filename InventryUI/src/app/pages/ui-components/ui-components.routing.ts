@@ -20,7 +20,7 @@ export const UiComponentsRoutes: Routes = [
   {
     path: '',
     children: [
-      {path: 'users', component: UsersComponent,},
+      {path: 'user', component: UsersComponent,},
       {path: 'roles',component: RolesComponent, },
       { path: 'add-role', component: AddRoleComponent },
       { path: 'update-role/:id', component: UpdateRoleComponent },
