@@ -59,18 +59,15 @@ export class DeviceComponent implements OnInit,AfterViewInit {
 
   private loadDropdownData = () => {
     this.repoService.getData('api/categories').subscribe(
-      res => this.categories = res as Category[],
-      error => this.errorMessage = 'Failed to load categories. Please try again later.'
+      res => this.categories = res as Category[]
     );
 
     this.repoService.getData('api/brands').subscribe(
-      res => this.brands = res as Brand[],
-      error => this.errorMessage = 'Failed to load brands. Please try again later.'
+      res => this.brands = res as Brand[]
     );
 
     this.repoService.getData('api/suppliers').subscribe(
-      res => this.suppliers = res as Supplier[],
-      error => this.errorMessage = 'Failed to load suppliers. Please try again later.'
+      res => this.suppliers = res as Supplier[]
     );
   }
 
@@ -112,7 +109,7 @@ export class DeviceComponent implements OnInit,AfterViewInit {
   }
 
   public redirectToUpdate(id: string) {
-    this.router.navigate([`/ui-components/update-device/${id}`]);
+   // this.router.navigate([`/ui-components/update-device/${id}`]);
   }
 
   ngAfterViewInit() {
