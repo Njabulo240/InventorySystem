@@ -1,12 +1,16 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { UserRoleDto, UserForRegistrationDto } from 'src/app/_interface/user';
+import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
 import { DataService } from 'src/app/shared/services/data.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
+import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 
 @Component({
@@ -19,13 +23,16 @@ export class UpdateUserComponent implements OnInit {
   selectedRoles: string[] = [];
   user:UserForRegistrationDto |any;
   private userId: string | null = '';
+  public errorMessage: string = '';
+  public bsModalRef?: BsModalRef;
 
   constructor( 
     private repoService: RepositoryService,
-    private dataService: DataService,
+    private errorHandler: RepositoryErrorHandlerService,
     private toastr: ToastrService,
-    private dialogserve: DialogService,
-    private route: ActivatedRoute) {}
+    private modal: BsModalService,
+    private route: ActivatedRoute,
+    private router: Router,) {}
 
   ngOnInit() {
     this.userId = this.route.snapshot.paramMap.get('id');
@@ -70,9 +77,21 @@ export class UpdateUserComponent implements OnInit {
     this.repoService.update(Uri, data).subscribe(
       (res) => {
 
+        const config: ModalOptions = {
+          initialState: {
+            modalHeaderText: 'Success Message',
+            modalBodyText: `${data.firstName} updated successfully`,
+            okButtonText: 'OK'
+          }
+        };
+
+        this.bsModalRef = this.modal.show(SuccessModalComponent, config);
+        this.bsModalRef.content.redirectOnOk.subscribe(() => this.redirectToUserList());
+
       },
-      (error) => {
-       // this.toastr.error(error);
+      (error:HttpErrorResponse) => {
+        this.errorHandler.handleError(error);
+        this.errorMessage = this.errorHandler.errorMessage;
       }
     );
   };
@@ -83,9 +102,11 @@ export class UpdateUserComponent implements OnInit {
       this.roles = res as UserRoleDto[];
       
     },
-    (err) => {
-      this.toastr.error(err);
-    })
+    (error:HttpErrorResponse) => {
+      this.errorHandler.handleError(error);
+      this.errorMessage = this.errorHandler.errorMessage;
+    }
+  );
   }
 
 
@@ -108,8 +129,9 @@ export class UpdateUserComponent implements OnInit {
           this.dataForm.patchValue(this.user);
           this.selectedRoles = this.user.roles; 
         },
-        error: (err) => {
-          //this.toastr.error(err);
+        error: (err:HttpErrorResponse) => {
+          this.errorHandler.handleError(err);
+          this.errorMessage = this.errorHandler.errorMessage;
         }
       })
   }
@@ -117,5 +139,7 @@ export class UpdateUserComponent implements OnInit {
   isSelected(roleName: string): boolean {
     return this.selectedRoles.includes(roleName);
   }
-
+  redirectToUserList = () => {
+    this.router.navigate(['/ui-components/user']);
+  }
 }

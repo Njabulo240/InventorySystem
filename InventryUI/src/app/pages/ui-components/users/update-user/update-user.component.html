@@ -1,14 +1,11 @@
-<mat-card class="cardWithShadow theme-card modal-card">
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%" class="b-1 shadow-none">
   <mat-card-header>
     <mat-card-title class="m-b-0">Update User</mat-card-title>
-    <span class="flex-1-auto"></span>
-    <button mat-flat-button matTooltipPosition="left" class="m-l-8" matTooltipHideDelay="100000" >
-      <mat-icon color="warn">close</mat-icon>
-    </button>
   </mat-card-header>
-  <mat-card-content class="b-t-1">
-    <form [formGroup]="dataForm" autocomplete="off" novalidate (ngSubmit)="createData(dataForm.value)">
 
+    <form [formGroup]="dataForm" autocomplete="off" novalidate (ngSubmit)="createData(dataForm.value)">
+      <mat-card-content >
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>First Name</mat-label>
         <input matInput formControlName="firstName" />
@@ -47,10 +44,13 @@
           {{ role.name }}
         </mat-checkbox>
       </div>
-
-      <button mat-flat-button color="primary" [disabled]="!dataForm.valid">
-        Save
-      </button>
-    </form>
-  </mat-card-content>
+    </mat-card-content>
+   
+ 
+  <mat-card-actions>
+    <button mat-flat-button color="primary" class="w-100 action-button" [disabled]="!dataForm.valid">Update</button>
+    <button type="button" mat-flat-button color="warn" class="w-100" (click)="redirectToUserList()">Cancel</button>
+  </mat-card-actions>
+</form>
 </mat-card>
+</section>

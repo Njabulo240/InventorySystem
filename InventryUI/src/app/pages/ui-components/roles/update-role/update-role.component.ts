@@ -1,15 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
-import { UserRoleCreationDto, UserRoleDto } from 'src/app/_interface/user';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
-import { DataService } from 'src/app/shared/services/data.service';
-import { DialogService } from 'src/app/shared/services/dialog.service';
-import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 
