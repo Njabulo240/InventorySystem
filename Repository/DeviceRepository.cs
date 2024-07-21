@@ -23,7 +23,11 @@ namespace Repository
 
         public async Task<IEnumerable<Device>> GetAllDevicesAsync(bool trackChanges)
         {
-            return await FindAll(trackChanges).OrderBy(ow => ow.Name).ToListAsync();
+            return await FindAll(trackChanges).OrderBy(ow => ow.Name)
+                 .Include(d => d.Category)
+                 .Include(d => d.Brand)
+                 .Include(d => d.Supplier)
+                .ToListAsync();
         }
 
         public async Task<Device> GetDeviceByIdAsync(Guid deviceId, bool trackChanges)

@@ -1,0 +1,125 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Devices</mat-card-title>
+    <span class="flex-1-auto"></span>
+    <button mat-flat-button color="primary" matTooltipPosition="left" class="m-l-8" matTooltipHideDelay="100000"
+      [routerLink]="['/ui-components/add-device']">
+      <mat-icon>add</mat-icon>Create new device
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="b-t-1">
+    <!-- Filter Form -->
+    <form [formGroup]="filterForm" class="filter-form">
+      <!-- Category Dropdown -->
+      <mat-form-field class="w-100 col-sm-6 col-lg-4" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="">All Categories</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category.name">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <!-- Brand Dropdown -->
+      <mat-form-field class="w-100 col-sm-6 col-lg-4" appearance="outline">
+        <mat-label>Brand</mat-label>
+        <mat-select formControlName="brand">
+          <mat-option value="">All Brands</mat-option>
+          <mat-option *ngFor="let brand of brands" [value]="brand.name">
+            {{ brand.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <!-- Supplier Dropdown -->
+      <mat-form-field class="w-100 col-sm-6 col-lg-4" appearance="outline">
+        <mat-label>Supplier</mat-label>
+        <mat-select formControlName="supplier">
+          <mat-option value="">All Suppliers</mat-option>
+          <mat-option *ngFor="let supplier of suppliers" [value]="supplier.name">
+            {{ supplier.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    
+    <mat-form-field class="w-100" appearance="outline">
+      <input matInput type="text" (keyup)="doFilter($any($event).target.value)" placeholder="Search....">
+    </mat-form-field>
+    <!-- Device Table -->
+    <div class="table-responsive m-t-16">
+      <table mat-table [dataSource]="dataSource" matSort matSortStart="desc">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Serial Number Column -->
+        <ng-container matColumnDef="serialNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Serial Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.serialNumber}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="categoryName">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header>
+            Category
+          </th>
+          <td mat-cell *matCellDef="let device" class="mat-body-1">
+            {{ device.categoryName }}
+          </td>
+        </ng-container>
+
+        <!-- Brand Column -->
+        <ng-container matColumnDef="brandName">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header>
+            Brand
+          </th>
+          <td mat-cell *matCellDef="let device" class="mat-body-1">
+            {{ device.brandName }}
+          </td>
+        </ng-container>
+
+        <!-- Supplier Column -->
+        <ng-container matColumnDef="supplierName">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header>
+            Supplier
+          </th>
+          <td mat-cell *matCellDef="let device" class="mat-body-1">
+            {{ device.supplierName }}
+          </td>
+        </ng-container>
+
+        <!-- Is Faulty Column -->
+        <ng-container matColumnDef="isFaulty">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Faulty </th>
+          <td mat-cell *matCellDef="let element"> {{element.isFaulty ? 'Yes' : 'No'}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary">
+              <mat-icon class="mat-18">visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="redirectToUpdate(element.id)">
+              <mat-icon class="mat-18">system_update</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" >
+              <mat-icon class="mat-18">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Header and Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

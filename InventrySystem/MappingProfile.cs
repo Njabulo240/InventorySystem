@@ -22,9 +22,10 @@ namespace InventrySystem
             CreateMap<UserForRegistrationDto, User>()
                 .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
 
-            CreateMap<Device, DeviceDto>();
-            CreateMap<DeviceForCreationDto, Device>();
-            CreateMap<DeviceForUpdateDto, Device>();
+            CreateMap<Device, DeviceDto>()
+                .ForMember(d => d.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+                .ForMember(d => d.BrandName, opt => opt.MapFrom(src => src.Brand.Name))
+                .ForMember(d => d.SupplierName, opt => opt.MapFrom(src => src.Supplier.Name));
 
             CreateMap<Category, CategoryDto>();
             CreateMap<CategoryForCreationDto, Category>();

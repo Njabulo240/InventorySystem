@@ -23,6 +23,7 @@ import { UpdateSupplierComponent } from './supplier/update-supplier/update-suppl
 import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
 import { UpdateCategoryComponent } from './category/update-category/update-category.component';
+import { DeviceComponent } from './device/device.component';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { UpdateCategoryComponent } from './category/update-category/update-categ
     UpdateSupplierComponent,
     CategoryComponent,
     AddCategoryComponent,
-    UpdateCategoryComponent
+    UpdateCategoryComponent,
+    DeviceComponent
     
   ],
 })

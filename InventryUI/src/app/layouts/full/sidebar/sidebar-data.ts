@@ -15,7 +15,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Devices',
     iconName: 'devices',
-    route: '/inventory/devices',
+    route: '/ui-components/device',
   },
   {
     displayName: 'Category',

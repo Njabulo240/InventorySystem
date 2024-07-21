@@ -11,6 +11,7 @@ import { UpdateSupplierComponent } from './supplier/update-supplier/update-suppl
 import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
 import { UpdateCategoryComponent } from './category/update-category/update-category.component';
+import { DeviceComponent } from './device/device.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -28,6 +29,9 @@ export const UiComponentsRoutes: Routes = [
       {path: 'category',component: CategoryComponent, },
       { path: 'add-category', component: AddCategoryComponent },
       { path: 'update-category/:id', component: UpdateCategoryComponent },
+      {path: 'device',component: DeviceComponent, },
+      { path: 'add-device', component: AddCategoryComponent },
+      { path: 'update-device/:id', component: UpdateCategoryComponent },
     ],
   },
 ];
