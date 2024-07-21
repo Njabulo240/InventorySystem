@@ -65,7 +65,7 @@ export class UsersComponent implements OnInit, AfterViewInit{
   }
 
   public redirectToUpdate = (id: string) => {
-    this.router.navigate([`/ui-components/update-user/${id}`]);
+    this.router.navigate([`/ui-components/update-user-role/${id}`]);
   }
 
   public deleteUser = (id: string) => {

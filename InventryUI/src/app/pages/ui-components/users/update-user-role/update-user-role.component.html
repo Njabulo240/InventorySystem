@@ -1,0 +1,22 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%" class="b-1 shadow-none">
+    <mat-card-header>
+      <mat-card-title>Update User Roles</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-label>Roles</mat-label>
+      <div *ngFor="let role of roles">
+        <mat-checkbox
+          [checked]="isSelected(role.name)"
+          (change)="toggleRoleSelection($event, role.name)"
+        >
+          {{ role.name }}
+        </mat-checkbox>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" class="w-100 action-button" (click)="updateUserRole()">Update Roles</button>
+      <button type="button" mat-flat-button color="warn" class="w-100" >Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</section>

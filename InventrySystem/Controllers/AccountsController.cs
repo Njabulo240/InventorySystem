@@ -5,6 +5,7 @@ using InventrySystem.JwtFeatures;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Shared.DTO.User;
 
 namespace InventrySystem.Controllers
@@ -142,54 +143,26 @@ namespace InventrySystem.Controllers
         }
 
 
-        [HttpGet("users")]
+        [HttpGet]
         public async Task<IActionResult> GetUsers()
-        {
-            var users = _userManager.Users.ToList();
-            return Ok(users);
-        }
-
-        [HttpPut("users/{userId}/roles")]
-        public async Task<IActionResult> UpdateUserRoles(string userId, [FromBody] List<string> roles)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-                return NotFound("User not found");
-
-            var userRoles = await _userManager.GetRolesAsync(user);
-            var result = await _userManager.RemoveFromRolesAsync(user, userRoles);
-            if (!result.Succeeded)
-                return BadRequest("Failed to remove user roles");
-
-            result = await _userManager.AddToRolesAsync(user, roles);
-            if (!result.Succeeded)
-                return BadRequest("Failed to add user roles");
-
-            return Ok("User roles updated successfully");
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(string id)
         {
             try
             {
-                var user = await _userManager.FindByIdAsync(id);
-                if (user == null)
+                var users = await _userManager.Users.ToListAsync();
+                var userDtos = _mapper.Map<IEnumerable<UserDto>>(users);
+
+                foreach (var userDto in userDtos)
                 {
-                    return NotFound();
+                    var user = await _userManager.FindByIdAsync(userDto.Id);
+                    var roles = await _userManager.GetRolesAsync(user);
+                    userDto.Roles = roles;
                 }
 
-                var result = await _userManager.DeleteAsync(user);
-                if (!result.Succeeded)
-                {
-                    return BadRequest("Failed to delete user");
-                }
-
-                return NoContent();
+                return Ok(userDtos);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "An error occurred while processing your request.");
             }
         }
     }

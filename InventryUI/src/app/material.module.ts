@@ -77,6 +77,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatDatepickerModule,
     MatNativeDateModule,
     FlexLayoutModule,
+    MatSnackBarModule,
 
   ],
 })

@@ -26,6 +26,7 @@ import { UpdateCategoryComponent } from './category/update-category/update-categ
 import { DeviceComponent } from './device/device.component';
 import { AddDeviceComponent } from './device/add-device/add-device.component';
 import { UpdateDeviceComponent } from './device/update-device/update-device.component';
+import { UpdateUserRoleComponent } from './users/update-user-role/update-user-role.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,7 @@ import { UpdateDeviceComponent } from './device/update-device/update-device.comp
       preventDuplicates: true, 
       progressBar: true, 
       closeButton: true 
-    })
+    }),
   ],
   declarations: [
     UsersComponent,
@@ -62,7 +63,8 @@ import { UpdateDeviceComponent } from './device/update-device/update-device.comp
     UpdateCategoryComponent,
     DeviceComponent,
     AddDeviceComponent,
-    UpdateDeviceComponent
+    UpdateDeviceComponent,
+    UpdateUserRoleComponent
     
   ],
 })
