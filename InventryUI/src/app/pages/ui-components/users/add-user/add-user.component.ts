@@ -71,25 +71,11 @@ export class AddUserComponent implements OnInit {
     this.authService.registerUser(apiUri, data).subscribe(
       (res:any) => {
 
-        this.dialogserve.openSuccessDialog("The default password is sent to the user's email address")
-        .afterClosed()
-        .subscribe((res) => {
-          this.dialogserve.openSuccessDialog("The user has been added successfully.")
-          .afterClosed()
-          .subscribe((res) => {
-            this.dataService.triggerRefreshTab1();
-            this.Ref.close([]);
-          });
-        });
+
  
       },
       (error:HttpErrorResponse) => {
-        this.dialogserve
-        .openErrorDialog(error.message)
-        .afterClosed()
-        .subscribe((res) => {
-        
-        });
+
       }
     );
   };

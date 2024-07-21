@@ -14,6 +14,7 @@ import { UpdateCategoryComponent } from './category/update-category/update-categ
 import { DeviceComponent } from './device/device.component';
 import { AddDeviceComponent } from './device/add-device/add-device.component';
 import { UpdateDeviceComponent } from './device/update-device/update-device.component';
+import { UpdateRoleComponent } from './roles/update-role/update-role.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -22,6 +23,7 @@ export const UiComponentsRoutes: Routes = [
       {path: 'users', component: UsersComponent,},
       {path: 'roles',component: RolesComponent, },
       { path: 'add-role', component: AddRoleComponent },
+      { path: 'update-role/:id', component: UpdateRoleComponent },
       {path: 'brand',component: BrandComponent, },
       { path: 'add-brand', component: AddBrandComponent },
       { path: 'update-brand/:id', component: UpdateBrandComponent },

@@ -72,12 +72,7 @@ export class UpdateUserComponent implements OnInit {
     const Uri: string = `api/users/${id}`;
     this.repoService.update(Uri, data).subscribe(
       (res) => {
-          this.dialogserve.openSuccessDialog("The user has been updated successfully.")
-          .afterClosed()
-          .subscribe((res) => {
-            this.dataService.triggerRefreshTab1();
-            this.Ref.close([]);
-          });
+   
       },
       (error) => {
         this.toastr.error(error);

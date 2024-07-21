@@ -1,24 +1,21 @@
-<mat-card class="cardWithShadow theme-card modal-card">
-  <mat-card-header>
-    <mat-card-title class="m-b-0">Update role</mat-card-title>
-    <span class="flex-1-auto"></span>
-    <button mat-flat-button matTooltipPosition="left" class="m-l-8" matTooltipHideDelay="100000"
-      (click)="closeModal()">
-      <mat-icon color="warn">close</mat-icon>
-    </button>
-  </mat-card-header>
-  <mat-card-content class="b-t-1">
-    <form [formGroup]="dataForm" autocomplete="off" novalidate (ngSubmit)="createData(dataForm.value)">
-
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Role Name</mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
-
-
-      <button mat-flat-button color="primary" [disabled]="!dataForm.valid">
-        Save
-      </button>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%" class="b-1 shadow-none">
+    <mat-card-header>
+      <mat-card-title>Update Role</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="roleForm" autocomplete="off" novalidate (ngSubmit)="updateRole(roleForm.value)">
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="Role name" formControlName="name" id="name">
+          <mat-hint align="end">Not more than 50 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 50 characters</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" class="w-100 action-button" [disabled]="!roleForm.valid">Update</button>
+        <button type="button" mat-flat-button color="warn" class="w-100" (click)="redirectToRoleList()">Cancel</button>
+      </mat-card-actions>
     </form>
-  </mat-card-content>
-</mat-card>
+  </mat-card>
+</section>

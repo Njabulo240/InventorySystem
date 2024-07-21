@@ -57,7 +57,7 @@ export class RolesComponent implements OnInit {
   }
 
   public redirectToUpdate = (id: string) => {
-    this.router.navigate([`/role/update/${id}`]);
+    this.router.navigate([`/ui-components/update-role/${id}`]);
   }
 
   public redirectToDelete = (id: string) => {

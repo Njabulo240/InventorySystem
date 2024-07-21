@@ -74,14 +74,7 @@ export class UsersComponent implements OnInit, AfterViewInit{
         .afterClosed()
         .subscribe(   (res) => {
           if (res) {
-            const deleteUri: string = `api/users/${id}`;
-            this.repoService.delete(deleteUri).subscribe((res) => {
-              this.dialogserve.openSuccessDialog("The user has been deleted successfully.")
-              .afterClosed()
-              .subscribe((res) => {
-                this.getUsers();
-              });
-            });
+
           }
         });
     }

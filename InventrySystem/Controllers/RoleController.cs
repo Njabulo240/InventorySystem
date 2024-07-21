@@ -79,7 +79,7 @@ namespace InventrySystem.Controllers
                     _logger.LogError("Failed to update role.");
                     return BadRequest("Failed to update role");
                 }
-                return Ok("Role updated successfully");
+                return Ok(new { message = "Role updated successfully" }); // Return a success message
             }
             catch (Exception ex)
             {
@@ -87,6 +87,7 @@ namespace InventrySystem.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRole(string id)
@@ -122,5 +123,27 @@ namespace InventrySystem.Controllers
             var roles = _roleManager.Roles.ToList();
             return Ok(roles);
         }
+
+        [HttpGet("{roleId}")]
+        public async Task<IActionResult> GetRoleById(string roleId)
+        {
+            try
+            {
+                var role = await _roleManager.FindByIdAsync(roleId);
+                if (role == null)
+                {
+                    _logger.LogError($"Role with id: {roleId}, hasn't been found in db.");
+                    return NotFound("Role not found");
+                }
+
+                return Ok(role);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetRoleById action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
     }
 }

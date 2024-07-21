@@ -13,7 +13,9 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
   templateUrl: './change-password.component.html'
 })
 export class ChangePasswordComponent implements OnInit {
-
+  showSuccess: boolean;
+  showError: boolean;
+  errorMessage: string;
   passwordForm: FormGroup |any;
   result: any;
   hidePassword = true;
@@ -61,18 +63,12 @@ export class ChangePasswordComponent implements OnInit {
     this.authService.changePassword('api/authentication/ChangePassword', changePassDto)
     .subscribe({
       next: (_) => {
-        this.dialogserve.openSuccessDialog('Password changed successfully, please login.')
-        .afterClosed()
-        .subscribe(   (res) => {
-          this.logout();
-        });
+        this.logout();
    
     },
     error: (err: HttpErrorResponse) => {
-      this.dialogserve.openErrorDialog(err.message)
-      .afterClosed()
-      .subscribe(   (res) => {
-      });
+      this.showError = true;
+      this.errorMessage = err.message;
     }})
   }
 

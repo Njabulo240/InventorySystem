@@ -1,11 +1,16 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { UserRoleCreationDto, UserRoleDto } from 'src/app/_interface/user';
+import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
 import { DataService } from 'src/app/shared/services/data.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
+import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 
 @Component({
@@ -14,84 +19,91 @@ import { RepositoryService } from 'src/app/shared/services/repository.service';
 })
 export class UpdateRoleComponent implements OnInit {
 
-  dataForm: FormGroup |any;
-  role: UserRoleDto |any;
-  result: any;
+  public roleForm: FormGroup | any;
+  public errorMessage: string = '';
+  public bsModalRef?: BsModalRef;
+  private roleId: string | null = '';
 
-  constructor( 
-    private repoService: RepositoryService,
-    private toastr: ToastrService,
-    private dataService: DataService,
-    private dialogserve: DialogService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private Ref: MatDialogRef<UpdateRoleComponent>) {}
+  constructor(
+    private repository: RepositoryService,
+    private errorHandler: RepositoryErrorHandlerService,
+    private router: Router,
+    private modal: BsModalService,
+    private route: ActivatedRoute
+  ) { }
 
-  ngOnInit() {
-    this.dataForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+  ngOnInit(): void {
+    this.roleId = this.route.snapshot.paramMap.get('id');
+    this.roleForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.maxLength(50)])
     });
-    this.result = this.data;
-    this.getRoletoUpdate();
+    this.initializeForm();
   }
 
-  public validateControl = (controlName: string) => {
-    return this.dataForm?.get(controlName)?.invalid && this.dataForm?.get(controlName)?.touched
-  }
-  public hasError = (controlName: string, errorName: string) => {
-    return this.dataForm?.get(controlName)?.hasError(errorName)
-  }
-
-  public createData = (dataFormValue: any) => {
-
-    if (this.dataForm.valid) {
-      this.executeDataCreation(dataFormValue);
-
-    }
-  };
-  private executeDataCreation = (dataFormValue: any) => {
-    let data: UserRoleCreationDto = {
-   
-      name: dataFormValue.name,
-
-    };
-    let id = this.result.id;
-    const Uri: string = `api/roles/${id}`;
-    this.repoService.update(Uri, data).subscribe(
-      (res) => {
-        this.dialogserve.openSuccessDialog("The role has been updated successfully.")
-        .afterClosed()
-        .subscribe((res) => {
-          this.dataService.triggerRefreshTab1();
-          this.Ref.close([]);
+  private initializeForm = () => {
+    if (this.roleId) {
+      this.repository.getData(`api/roles/${this.roleId}`)
+        .subscribe({
+          next: (role: any) => {
+            this.roleForm.setValue({
+              name: role.name
+            });
+          },
+          error: (err: HttpErrorResponse) => {
+            this.errorHandler.handleError(err);
+            this.errorMessage = this.errorHandler.errorMessage;
+          }
         });
-      },
-      (error) => {
-        this.toastr.error(error);
-        this.Ref.close([]);
-      }
-    );
-  };
-
-
-
-
-  closeModal(){
-    this.Ref.close([]);
+    }
   }
 
-  private getRoletoUpdate = () => {
-    let id = this.result.id;
-    const Uri: string = `api/roles/${id}`;
-    console.log(Uri);
-    this.repoService.getData(Uri)
-    .subscribe({
-      next: (own: UserRoleDto|any) => {
-        this.role = {...own};
-        this.dataForm.patchValue(this.role);
-      },
-      error: (err) => {
-        this.toastr.success(err);
-      }
-    })
+  validateControl = (controlName: string) => {
+    if (this.roleForm.get(controlName).invalid && this.roleForm.get(controlName).touched)
+      return true;
+
+    return false;
+  }
+
+  hasError = (controlName: string, errorName: string) => {
+    if (this.roleForm.get(controlName).hasError(errorName))
+      return true;
+
+    return false;
+  }
+
+  updateRole = (roleFormValue: any) => {
+    if (this.roleForm.valid)
+      this.executeRoleUpdate(roleFormValue);
+  }
+
+  private executeRoleUpdate = (roleFormValue: any) => {
+    const updatedRole: any = {
+      name: roleFormValue.name
+    };
+
+    const apiUrl = `api/roles/${this.roleId}`;
+    this.repository.update(apiUrl, updatedRole)
+      .subscribe({
+        next: () => {
+          const config: ModalOptions = {
+            initialState: {
+              modalHeaderText: 'Success Message',
+              modalBodyText: `Role updated successfully`,
+              okButtonText: 'OK'
+            }
+          };
+
+          this.bsModalRef = this.modal.show(SuccessModalComponent, config);
+          this.bsModalRef.content.redirectOnOk.subscribe(() => this.redirectToRoleList());
+        },
+        error: (err: HttpErrorResponse) => {
+          this.errorHandler.handleError(err);
+          this.errorMessage = this.errorHandler.errorMessage;
+        }
+      });
+  }
+
+  redirectToRoleList = () => {
+    this.router.navigate(['/ui-components/roles']);
   }
 }
