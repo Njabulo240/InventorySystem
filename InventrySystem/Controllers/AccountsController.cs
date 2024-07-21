@@ -165,5 +165,86 @@ namespace InventrySystem.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
+
+        [HttpGet("{id}", Name = "UserById")]
+        public async Task<IActionResult> GetUser(string id)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                if (user == null)
+                {
+                    return NotFound(new { Message = $"User with ID {id} not found." });
+                }
+
+                var userDto = _mapper.Map<UserDto>(user);
+                var roles = await _userManager.GetRolesAsync(user);
+                userDto.Roles = roles;
+
+                return Ok(userDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] UserForUpdateDto updatedUser)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                if (user == null)
+                {
+                    return NotFound(new { Message = $"User with ID {id} not found." });
+                }
+
+                var userRoles = await _userManager.GetRolesAsync(user);
+                await _userManager.RemoveFromRolesAsync(user, userRoles);
+
+                var userDto = _mapper.Map(updatedUser, user);
+                var result = await _userManager.UpdateAsync(userDto);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRolesAsync(user, updatedUser.Roles);
+                    return NoContent();
+                }
+
+                return BadRequest(result.Errors);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                if (user == null)
+                {
+                    return NotFound(new { Message = $"User with ID {id} not found." });
+                }
+
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return NoContent();
+                }
+
+                return BadRequest(result.Errors);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
     }
 }
