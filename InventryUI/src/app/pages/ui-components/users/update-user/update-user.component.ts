@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserRoleDto, UserForRegistrationDto } from 'src/app/_interface/user';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -17,17 +18,17 @@ export class UpdateUserComponent implements OnInit {
   roles:UserRoleDto []|any;
   selectedRoles: string[] = [];
   user:UserForRegistrationDto |any;
-  result: any;
+  private userId: string | null = '';
 
   constructor( 
     private repoService: RepositoryService,
     private dataService: DataService,
     private toastr: ToastrService,
     private dialogserve: DialogService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private Ref: MatDialogRef<UpdateUserComponent>) {}
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.userId = this.route.snapshot.paramMap.get('id');
     this.dataForm = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       lastName: new FormControl('', [Validators.required, Validators.maxLength(60)]),
@@ -36,8 +37,6 @@ export class UpdateUserComponent implements OnInit {
     });
 
     this.getRoles();
-
-    this.result = this.data;
     this.getUsertoUpdate();
   }
 
@@ -67,16 +66,13 @@ export class UpdateUserComponent implements OnInit {
       roles: this.selectedRoles,
 
     };
-
-       let id = this.result.id;
-    const Uri: string = `api/users/${id}`;
+    const Uri: string = `api/accounts/${this.userId}`;
     this.repoService.update(Uri, data).subscribe(
       (res) => {
-   
+
       },
       (error) => {
-        this.toastr.error(error);
-        this.Ref.close([]);
+       // this.toastr.error(error);
       }
     );
   };
@@ -101,13 +97,9 @@ export class UpdateUserComponent implements OnInit {
     }
   }
 
-  closeModal(){
-    this.Ref.close([]);
-  }
-
   private getUsertoUpdate = () => {
-    let id = this.result.id;
-    const Uri: string = `api/users/${id}`;
+
+    const Uri: string = `api/accounts/${this.userId}`;
     console.log(Uri);
     this.repoService.getData(Uri)
       .subscribe({
@@ -117,7 +109,7 @@ export class UpdateUserComponent implements OnInit {
           this.selectedRoles = this.user.roles; 
         },
         error: (err) => {
-          this.toastr.error(err);
+          //this.toastr.error(err);
         }
       })
   }

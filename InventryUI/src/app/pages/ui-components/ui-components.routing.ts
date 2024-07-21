@@ -16,13 +16,14 @@ import { AddDeviceComponent } from './device/add-device/add-device.component';
 import { UpdateDeviceComponent } from './device/update-device/update-device.component';
 import { UpdateRoleComponent } from './roles/update-role/update-role.component';
 import { UpdateUserRoleComponent } from './users/update-user-role/update-user-role.component';
+import { UpdateUserComponent } from './users/update-user/update-user.component';
 
 export const UiComponentsRoutes: Routes = [
   {
     path: '',
     children: [
       {path: 'user', component: UsersComponent,},
-      { path: 'update-user-role/:id', component: UpdateUserRoleComponent },
+      { path: 'update-user/:id', component: UpdateUserComponent },
       {path: 'roles',component: RolesComponent, },
       { path: 'add-role', component: AddRoleComponent },
       { path: 'update-role/:id', component: UpdateRoleComponent },

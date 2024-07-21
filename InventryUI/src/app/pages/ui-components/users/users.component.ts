@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit, AfterViewInit{
   }
 
   public getAllUsers = () => {
-    this.repoService.getData('api/accounts/users')
+    this.repoService.getData('api/accounts')
       .subscribe({
         next: (data: UserDto[] |any) => {
           this.dataSource.data = data;
@@ -65,7 +65,7 @@ export class UsersComponent implements OnInit, AfterViewInit{
   }
 
   public redirectToUpdate = (id: string) => {
-    this.router.navigate([`/ui-components/update-user-role/${id}`]);
+    this.router.navigate([`/ui-components/update-user/${id}`]);
   }
 
   public deleteUser = (id: string) => {

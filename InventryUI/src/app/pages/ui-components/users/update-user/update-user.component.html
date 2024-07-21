@@ -1,9 +1,8 @@
 <mat-card class="cardWithShadow theme-card modal-card">
   <mat-card-header>
-    <mat-card-title class="m-b-0">Update user</mat-card-title>
+    <mat-card-title class="m-b-0">Update User</mat-card-title>
     <span class="flex-1-auto"></span>
-    <button mat-flat-button  matTooltipPosition="left" class="m-l-8" matTooltipHideDelay="100000"
-      (click)="closeModal()">
+    <button mat-flat-button matTooltipPosition="left" class="m-l-8" matTooltipHideDelay="100000" >
       <mat-icon color="warn">close</mat-icon>
     </button>
   </mat-card-header>
@@ -13,21 +12,34 @@
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>First Name</mat-label>
         <input matInput formControlName="firstName" />
+        <mat-error *ngIf="validateControl('firstName')">
+          First Name is required and must be less than 60 characters.
+        </mat-error>
       </mat-form-field>
+
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastName" />
+        <mat-error *ngIf="validateControl('lastName')">
+          Last Name is required and must be less than 60 characters.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>User Name</mat-label>
         <input matInput formControlName="userName" />
+        <mat-error *ngIf="validateControl('userName')">
+          User Name is required and must be less than 60 characters.
+        </mat-error>
       </mat-form-field>
+
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" />
+        <mat-error *ngIf="validateControl('email')">
+          Email is required and must be less than 100 characters.
+        </mat-error>
       </mat-form-field>
-
 
       <mat-label>Roles</mat-label>
       <div *ngFor="let role of roles">
@@ -35,8 +47,6 @@
           {{ role.name }}
         </mat-checkbox>
       </div>
-
-
 
       <button mat-flat-button color="primary" [disabled]="!dataForm.valid">
         Save
