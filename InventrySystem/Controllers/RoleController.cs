@@ -10,7 +10,7 @@ namespace InventrySystem.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     {
-        private ILoggerManager _logger;
+        private readonly ILoggerManager _logger;
         private readonly RoleManager<UserRole> _roleManager;
 
         public RolesController(ILoggerManager logger, RoleManager<UserRole> roleManager)
@@ -43,7 +43,9 @@ namespace InventrySystem.Controllers
                     _logger.LogError("Failed to create role.");
                     return BadRequest("Failed to create role");
                 }
-                return Ok("Role created successfully");
+
+                var createdRole = await _roleManager.FindByNameAsync(roleDto.Name);
+                return Ok(new { message = "Role created successfully", role = createdRole });
             }
             catch (Exception ex)
             {
@@ -86,18 +88,32 @@ namespace InventrySystem.Controllers
             }
         }
 
-        [HttpDelete("{roleId}")]
-        public async Task<IActionResult> DeleteRole(string roleId)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRole(string id)
         {
-            var role = await _roleManager.FindByIdAsync(roleId);
-            if (role == null)
-                return NotFound("Role not found");
+            try
+            {
+                var role = await _roleManager.FindByIdAsync(id);
+                if (role == null)
+                {
+                    _logger.LogError($"Role with id: {id}, hasn't been found in db.");
+                    return NotFound();
+                }
 
-            var result = await _roleManager.DeleteAsync(role);
-            if (!result.Succeeded)
-                return BadRequest("Failed to delete role");
+                var result = await _roleManager.DeleteAsync(role);
+                if (!result.Succeeded)
+                {
+                    _logger.LogError("Failed to delete role.");
+                    return BadRequest("Failed to delete role");
+                }
 
-            return Ok("Role deleted successfully");
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteRole action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpGet]

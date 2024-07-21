@@ -29,7 +29,7 @@ export class ErrorHandlerService implements HttpInterceptor {
     }
   }
 
-  private handleError = (error: HttpErrorResponse) : string|any => {
+  public handleError = (error: HttpErrorResponse) : string|any => {
     if(error.status === 404){
       return this.handleNotFound(error);
     }
@@ -38,9 +38,6 @@ export class ErrorHandlerService implements HttpInterceptor {
     }
     else if(error.status === 401) {
       return this.handleUnauthorized(error);
-    }
-    else if(error.status === 422) {
-      return this.Unprocessable(error);
     }
     else if(error.status === 500) {
       return this.handle500Error(error);
@@ -71,24 +68,5 @@ export class ErrorHandlerService implements HttpInterceptor {
     }
     return error.message || 'An unknown error occurred';
   };
-  
-
-  private Unprocessable = (error: HttpErrorResponse): string => {
-    if(this.router.url === '/authentication/forgot-password' ||
-    this.router.url.startsWith('/ui-components'))
-      
-      {
-      let message = '';
-      const values = Object.values(error.error.errors);
-      values.map((m: string |any) => {
-         message += m + '<br>';
-      })
-      return message.slice(0, -4);
-    }
-    else{
-      return error.error ? error.error : error.message;
-    }
-
-  }
 
 }

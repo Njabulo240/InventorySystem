@@ -54,15 +54,14 @@ export class AddRoleComponent implements OnInit {
       name: roleFormValue.name
     };
 
-    console.log(role);
     const apiUrl = 'api/roles';
     this.repository.create(apiUrl, role)
       .subscribe({
-        next: (createdRole: any) => {
+        next: (response: any) => {
           const config: ModalOptions = {
             initialState: {
               modalHeaderText: 'Success Message',
-              modalBodyText: `Role: ${createdRole.name} created successfully`,
+              modalBodyText: `Role: ${response.role.name} created successfully`,
               okButtonText: 'OK'
             }
           };
