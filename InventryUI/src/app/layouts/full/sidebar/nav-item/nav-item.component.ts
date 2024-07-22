@@ -21,6 +21,7 @@ export class AppNavItemComponent implements OnChanges {
   ngOnChanges() {
     this.navService.currentUrl.subscribe((url: string) => {
       if (this.item.route && url) {
+        // some logic to highlight the current route
       }
     });
   }
@@ -35,5 +36,9 @@ export class AppNavItemComponent implements OnChanges {
       top: 0,
       left: 0,
     });
+  }
+
+  toggleChildren(item: NavItem) {
+    item.expanded = !item.expanded;
   }
 }

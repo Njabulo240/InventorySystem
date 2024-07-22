@@ -2,100 +2,107 @@ import { NavItem } from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
   {
-    navCap: 'Home',
-  },
-  {
     displayName: 'Dashboard',
     iconName: 'layout-dashboard',
     route: '/dashboard',
   },
   {
-    navCap: 'Inventory Management',
-  },
-  {
-    displayName: 'Devices',
-    iconName: 'devices',
-    route: '/ui-components/device',
-  },
-  {
-    displayName: 'Category',
-    iconName: 'rosette',
-    route: '/ui-components/category',
-  },
-  {
-    displayName: 'Brand',
+    displayName: 'Inventory items',
     iconName: 'list',
-    route: '/ui-components/brand',
+    children: [
+      {
+        displayName: 'Devices',
+        iconName: 'devices',
+        route: '/ui-components/device',
+      },
+      {
+        displayName: 'Category',
+        iconName: 'rosette',
+        route: '/ui-components/category',
+      },
+      {
+        displayName: 'Brand',
+        iconName: 'list',
+        route: '/ui-components/brand',
+      },
+      {
+        displayName: 'Suppliers',
+        iconName: 'calendar',
+        route: '/ui-components/supplier',
+      },
+    ],
   },
   {
-    displayName: 'Suppliers',
-    iconName: 'calendar',
-    route: '/ui-components/supplier',
-  },
-  {
-    navCap: 'User Management',
-  },
-  {
-    displayName: 'Roles',
-    iconName: 'user-check',
-    route: '/ui-components/roles',
-  },
-  {
-    displayName: 'User',
-    iconName: 'user-check',
-    route: '/ui-components/user',
-  },
-  {
-    navCap: 'Device Assignment',
-  },
-  {
-    displayName: 'Assign Devices',
-    iconName: 'device-hub',
-    route: '/device-assignment/assign',
-  },
-  {
-    displayName: 'Assigned Devices',
-    iconName: 'assignment',
-    route: '/device-assignment/list',
+    displayName: 'User Management',
+    iconName: 'user',
+    children: [
+      {
+        displayName: 'Roles',
+        iconName: 'user-check',
+        route: '/ui-components/roles',
+      },
+      {
+        displayName: 'User',
+        iconName: 'user-check',
+        route: '/ui-components/user',
+      },
+    ],
   },
 
   {
-    navCap: 'Employee and Office',
+    displayName: 'Device Assignment',
+    iconName: 'devices',
+    children: [
+      {
+        displayName: 'Assign Devices',
+        iconName: 'device-hub',
+        route: '/device-assignment/assign',
+      },
+      {
+        displayName: 'Assigned Devices',
+        iconName: 'assignment',
+        route: '/device-assignment/list',
+      },
+    ],
   },
+
   {
-    displayName: 'Employees',
-    iconName: 'users',
-    route: '/employee-office/employees',
-  },
-  {
-    displayName: 'Offices',
+    displayName: 'Employee and Office',
     iconName: 'building',
-    route: '/employee-office/offices',
+    children: [
+      {
+        displayName: 'Employees',
+        iconName: 'users',
+        route: '/employee-office/employees',
+      },
+      {
+        displayName: 'Offices',
+        iconName: 'building',
+        route: '/employee-office/offices',
+      },
+    ],
   },
+
   {
-    navCap: 'Asset Management',
+    displayName: 'Asset Management',
+    iconName: 'settings',
+    children: [
+      {
+        displayName: 'Maintenance',
+        iconName: 'calendar',
+        route: '/asset-management/maintenance',
+      },
+      {
+        displayName: 'Service History',
+        iconName: 'history',
+        route: '/asset-management/service-history',
+      },
+      {
+        displayName: 'Faulty Devices',
+        iconName: 'alert-triangle',
+        route: '/inventory/faulty-devices',
+      },
+    ],
   },
-  {
-    displayName: 'Maintenance',
-    iconName: 'calendar',
-    route: '/asset-management/maintenance',
-  },
-  {
-    displayName: 'Service History',
-    iconName: 'history',
-    route: '/asset-management/service-history',
-  },
-  {
-    displayName: 'Faulty Devices',
-    iconName: 'alert-triangle',
-    route: '/inventory/faulty-devices',
-  },
-  {
-    navCap: 'Reports and Analytics',
-  },
-  {
-    displayName: 'Reports',
-    iconName: 'bar-chart',
-    route: '/reports',
-  },
+
 ];

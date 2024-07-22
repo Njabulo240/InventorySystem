@@ -23,7 +23,7 @@ namespace Repository
 
         public async Task<IEnumerable<Employee>> GetAllEmployeesAsync(bool trackChanges)
         {
-            return await FindAll(trackChanges).OrderBy(e => e.Name).ToListAsync();
+            return await FindAll(trackChanges).OrderBy(e => e.LastName).ToListAsync();
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(Guid employeeId, bool trackChanges)
