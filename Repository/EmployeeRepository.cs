@@ -31,7 +31,8 @@ namespace Repository
         public async Task<Employee> GetEmployeeByIdAsync(Guid employeeId, bool trackChanges)
         {
             return await FindByCondition(employee => employee.Id.Equals(employeeId), trackChanges)
-     .FirstOrDefaultAsync();
+                                .Include(e => e.DeviceAssignments)
+                                .FirstOrDefaultAsync();
         }
 
         public void UpdateEmployee(Employee employee)

@@ -31,6 +31,7 @@ namespace Repository
         public async Task<Office> GetOfficeByIdAsync(Guid officeId, bool trackChanges)
         {
             return await FindByCondition(office => office.Id.Equals(officeId), trackChanges)
+             .Include(e => e.DeviceAssignments)
              .FirstOrDefaultAsync();
         }
 
