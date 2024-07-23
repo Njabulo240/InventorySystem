@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace InventrySystem.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240723135446_InitialData8")]
+    partial class InitialData8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -275,7 +278,7 @@ namespace InventrySystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("73e67e37-3a7c-4c5e-a0a2-5092e5d27c17"),
+                            Id = new Guid("9dde703b-31e3-4a80-b016-a82483066154"),
                             BrandId = new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"),
                             CategoryId = new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"),
                             IsAvailable = true,
@@ -286,7 +289,7 @@ namespace InventrySystem.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5779ce01-3b1d-4deb-a8a4-995ff8fd0f73"),
+                            Id = new Guid("1de4020b-7b57-4251-9072-67d27071e1bb"),
                             BrandId = new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"),
                             CategoryId = new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"),
                             IsAvailable = true,
@@ -309,13 +312,13 @@ namespace InventrySystem.Migrations
                     b.Property<Guid>("DeviceId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("EmployeeId")
+                    b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("OfficeId")
+                    b.Property<Guid>("OfficeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("ReturnedDate")
@@ -522,13 +525,13 @@ namespace InventrySystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "563b6568-27a5-48ee-9438-af612787a805",
+                            Id = "4f6a75d3-67c9-4758-8a90-f697c2f20729",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "a241be6e-c5b6-4fab-915b-c974176b1f84",
+                            Id = "bf65b29a-e166-4c68-9ed9-675af4eb06b0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -678,12 +681,14 @@ namespace InventrySystem.Migrations
                     b.HasOne("Entities.Models.Employee", "Employee")
                         .WithMany("DeviceAssignments")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Entities.Models.Office", "Office")
                         .WithMany("DeviceAssignments")
                         .HasForeignKey("OfficeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Device");
 

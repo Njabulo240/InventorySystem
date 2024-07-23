@@ -17,7 +17,7 @@ export class EmployeeDetailsComponent implements OnInit {
   public bsModalRef?: BsModalRef;
   public employeeDetails: any;
   public errorMessage: string = '';
-  public displayedColumns: string[] = ['serialNumber', 'categoryName', 'brandName', 'name', 'assignedDate'];
+  public displayedColumns: string[] = ['serialNumber', 'categoryName', 'brandName', 'name', 'assignedDate', 'delete'];
   public dataSource = new MatTableDataSource<any>();
 
   constructor(
@@ -48,17 +48,17 @@ export class EmployeeDetailsComponent implements OnInit {
       });
   }
 
-  public deleteOffice(id: string) {
-    this.dialogService.openConfirmDialog('Are you sure you want to delete this office?')
+  public deleteAssignDevice(id: string) {
+    this.dialogService.openConfirmDialog('Are you sure you want to remove this device?')
       .afterClosed()
       .subscribe(res => {
         if (res) {
-          const deleteUri: string = `api/offices/${id}`;
+          const deleteUri: string = `api/deviceassignments/${id}`;
           this.repository.delete(deleteUri).subscribe(() => {
             const config: ModalOptions = {
               initialState: {
                 modalHeaderText: 'Success Message',
-                modalBodyText: `Office deleted successfully`,
+                modalBodyText: `Device remove successfully`,
                 okButtonText: 'OK'
               }
             };

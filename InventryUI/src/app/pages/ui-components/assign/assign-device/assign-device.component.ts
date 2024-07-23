@@ -91,7 +91,8 @@ export class AssignDeviceComponent implements OnInit {
       employeeId: deviceAssignmentFormValue.employeeId
     };
 
-    const apiUrl = 'api/deviceassignments';
+    console.log(deviceAssignment);
+    const apiUrl = 'api/deviceassignments/employee';
     this.repository.create(apiUrl, deviceAssignment)
       .subscribe({
         next: (createdDeviceAssignment: any) => {

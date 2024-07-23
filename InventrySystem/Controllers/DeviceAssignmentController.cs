@@ -63,51 +63,45 @@ namespace InventrySystem.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("employee")]
         public async Task<IActionResult> CreateDeviceAssignment([FromBody] DeviceAssignmentForCreationDto deviceAssignment)
         {
-            try
+
+            if (deviceAssignment == null)
             {
-                if (deviceAssignment == null)
-                {
-                    _logger.LogError("Device assignment object sent from client is null.");
-                    return BadRequest("Device assignment object is null");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid device assignment object sent from client.");
-                    return BadRequest("Invalid model object");
-                }
-
-                var deviceAssignmentEntity = _mapper.Map<DeviceAssignment>(deviceAssignment);
-
-                _repository.DeviceAssignment.CreateDeviceAssignment(deviceAssignmentEntity);
-                _repository.SaveAsync();
-
-                var createdDeviceAssignment = _mapper.Map<DeviceAssignmentDto>(deviceAssignmentEntity);
-
-                // update device here
-                var device = await _repository.Device.GetDeviceByIdAsync(deviceAssignment.DeviceId, trackChanges: false);
-                if (device == null)
-                {
-                    _logger.LogError($"Device with id: {deviceAssignment.DeviceId}, hasn't been found in db.");
-                    return NotFound("Device not found");
-                }
-
-                device.IsAvailable = false;
-                _repository.Device.UpdateDevice(device);
-                _repository.SaveAsync();
-
-
-
-                return CreatedAtRoute("DeviceAssignmentById", new { id = createdDeviceAssignment.Id }, createdDeviceAssignment);
+                _logger.LogError("Device assignment object sent from client is null.");
+                return BadRequest("Device assignment object is null");
             }
-            catch (Exception ex)
+
+            if (!ModelState.IsValid)
             {
-                _logger.LogError($"Something went wrong inside CreateDeviceAssignment action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                _logger.LogError("Invalid device assignment object sent from client.");
+                return BadRequest("Invalid model object");
             }
+
+            var deviceAssignmentEntity = _mapper.Map<DeviceAssignment>(deviceAssignment);
+
+            _repository.DeviceAssignment.CreateDeviceAssignment(deviceAssignmentEntity);
+            _repository.SaveAsync();
+
+            var createdDeviceAssignment = _mapper.Map<DeviceAssignmentDto>(deviceAssignmentEntity);
+
+            // update device here
+            var device = await _repository.Device.GetDeviceByIdAsync(deviceAssignment.DeviceId, trackChanges: false);
+            if (device == null)
+            {
+                _logger.LogError($"Device with id: {deviceAssignment.DeviceId}, hasn't been found in db.");
+                return NotFound("Device not found");
+            }
+
+            device.IsAvailable = false;
+            _repository.Device.UpdateDevice(device);
+            _repository.SaveAsync();
+
+
+
+            return CreatedAtRoute("DeviceAssignmentById", new { id = createdDeviceAssignment.Id }, createdDeviceAssignment);
+
         }
 
         [HttpPost("office")]
