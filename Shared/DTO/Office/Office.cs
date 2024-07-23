@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Shared.DTO.DeviceAssignment;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shared.DTO.Office
 {
@@ -27,6 +28,8 @@ namespace Shared.DTO.Office
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Location { get; set; }
+
+        public IEnumerable<DeviceAssignmentDto>? DeviceAssignments { get; set; }
     }
 
 }

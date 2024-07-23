@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Shared.DTO.DeviceAssignment;
+using System.ComponentModel.DataAnnotations;
 
 namespace Shared.DTO.Employee
 {
@@ -56,6 +57,7 @@ namespace Shared.DTO.Employee
         public string? EmployeeNumber { get; set; }
         public string? Position { get; set; }
         public string? Email { get; set; }
+        public IEnumerable<DeviceAssignmentDto>? DeviceAssignments { get; set; }
     }
 
 }

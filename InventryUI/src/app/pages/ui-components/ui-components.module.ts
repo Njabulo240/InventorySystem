@@ -35,6 +35,7 @@ import { AddOfficeComponent } from './office/add-office/add-office.component';
 import { UpdateOfficeComponent } from './office/update-office/update-office.component';
 import { AssignDeviceComponent } from './assign/assign-device/assign-device.component';
 import { AssignOfficeComponent } from './assign/assign-office/assign-office.component';
+import { OfficeDetailsComponent } from './assign/assign-office/office-details/office-details.component';
 
 @NgModule({
   imports: [
@@ -80,7 +81,8 @@ import { AssignOfficeComponent } from './assign/assign-office/assign-office.comp
     AddOfficeComponent,
     UpdateOfficeComponent,
     AssignDeviceComponent,
-    AssignOfficeComponent
+    AssignOfficeComponent,
+    OfficeDetailsComponent
     
   ],
 })

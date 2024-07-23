@@ -23,7 +23,9 @@ namespace Repository
 
         public async Task<IEnumerable<Office>> GetAllOfficesAsync(bool trackChanges)
         {
-            return await FindAll(trackChanges).OrderBy(b => b.Name).ToListAsync();
+            return await FindAll(trackChanges).OrderBy(b => b.Name)
+                 .Include(e => e.DeviceAssignments)
+                .ToListAsync();
         }
 
         public async Task<Office> GetOfficeByIdAsync(Guid officeId, bool trackChanges)
