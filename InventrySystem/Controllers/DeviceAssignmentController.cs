@@ -204,6 +204,18 @@ namespace InventrySystem.Controllers
                 _repository.DeviceAssignment.DeleteDeviceAssignment(deviceAssignment);
                 _repository.SaveAsync();
 
+                // update device here
+                var device = await _repository.Device.GetDeviceByIdAsync(deviceAssignment.DeviceId, trackChanges: false);
+                if (device == null)
+                {
+                    _logger.LogError($"Device with id: {deviceAssignment.DeviceId}, hasn't been found in db.");
+                    return NotFound("Device not found");
+                }
+
+                device.IsAvailable = true;
+                _repository.Device.UpdateDevice(device);
+                _repository.SaveAsync();
+
 
 
                 return NoContent();
