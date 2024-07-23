@@ -57,6 +57,24 @@ namespace InventrySystem.Controllers
             }
         }
 
+        [HttpGet("faculty")]
+        public async Task<IActionResult> GetAllFaultyDevices()
+        {
+            try
+            {
+                var devices = await _repository.Device.GetAllFaultDevicesAsync(trackChanges: false);
+                _logger.LogInfo("Returned all devices from database.");
+
+                var devicesResult = _mapper.Map<IEnumerable<DeviceDto>>(devices);
+                return Ok(devicesResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllDevices action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
 
         [HttpGet("{id}", Name = "DeviceById")]
         public async Task<IActionResult> GetDeviceById(Guid id)

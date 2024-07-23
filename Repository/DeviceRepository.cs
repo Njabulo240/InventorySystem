@@ -24,11 +24,11 @@ namespace Repository
         public async Task<IEnumerable<Device>> GetAllAvailableDevicesAsync(bool trackChanges)
         {
             return await FindAll(trackChanges).OrderBy(ow => ow.Name)
-      .Include(d => d.Category)
-      .Include(d => d.Brand)
-      .Include(d => d.Supplier)
-      .Where(d => d.IsAvailable == true)
-     .ToListAsync();
+               .Include(d => d.Category)
+               .Include(d => d.Brand)
+               .Include(d => d.Supplier)
+               .Where(d => d.IsAvailable == true)
+               .ToListAsync();
         }
 
         public async Task<IEnumerable<Device>> GetAllDevicesAsync(bool trackChanges)
@@ -37,7 +37,17 @@ namespace Repository
                  .Include(d => d.Category)
                  .Include(d => d.Brand)
                  .Include(d => d.Supplier)
-                .ToListAsync();
+                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Device>> GetAllFaultDevicesAsync(bool trackChanges)
+        {
+            return await FindAll(trackChanges).OrderBy(ow => ow.Name)
+             .Include(d => d.Category)
+             .Include(d => d.Brand)
+             .Include(d => d.Supplier)
+             .Where(d => d.IsFaulty == true)
+             .ToListAsync();
         }
 
         public async Task<Device> GetDeviceByIdAsync(Guid deviceId, bool trackChanges)
