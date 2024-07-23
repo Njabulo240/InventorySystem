@@ -37,6 +37,7 @@ namespace Repository
                  .Include(d => d.Category)
                  .Include(d => d.Brand)
                  .Include(d => d.Supplier)
+                 .Where(d => d.IsFaulty == false)
                  .ToListAsync();
         }
 

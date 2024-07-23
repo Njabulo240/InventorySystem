@@ -57,8 +57,8 @@ namespace InventrySystem.Controllers
             }
         }
 
-        [HttpGet("faculty")]
-        public async Task<IActionResult> GetAllFaultyDevices()
+        [HttpGet("fault")]
+        public async Task<IActionResult> GetAllFaultDevices()
         {
             try
             {
