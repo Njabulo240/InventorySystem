@@ -19,6 +19,7 @@ export class AssignDeviceComponent implements OnInit {
   public devices: any[] = [];
   public filteredDevices: any[] = [];
   public employees: any[] = [];
+  public filteredEmployees: any[] = [];
   public categories: any[] = [];
   public brands: any[] = [];
 
@@ -50,14 +51,17 @@ export class AssignDeviceComponent implements OnInit {
   }
 
   private loadDropdownData() {
-    this.repository.getData('api/devices')
+    this.repository.getData('api/devices/available')
       .subscribe(res => {
         this.devices = res as any[];
         this.filteredDevices = this.devices;
       }, err => this.errorHandler.handleError(err));
 
     this.repository.getData('api/employees')
-      .subscribe(res => this.employees = res as any[], err => this.errorHandler.handleError(err));
+      .subscribe(res => {
+        this.employees = res as any[];
+        this.filteredEmployees = this.employees;
+      }, err => this.errorHandler.handleError(err));
 
     this.repository.getData('api/categories')
       .subscribe(res => this.categories = res as any[], err => this.errorHandler.handleError(err));
@@ -108,7 +112,14 @@ export class AssignDeviceComponent implements OnInit {
   }
 
   redirectToDeviceAssignmentList(): void {
-    this.router.navigate(['/ui-components/device-assignment']);
+    this.loadDropdownData();
+    this.deviceAssignmentForm.get('category').valueChanges.subscribe(() => {
+      this.applyFilter();
+    });
+
+    this.deviceAssignmentForm.get('brand').valueChanges.subscribe(() => {
+      this.applyFilter();
+    });
   }
 
   private applyFilter() {
@@ -121,5 +132,15 @@ export class AssignDeviceComponent implements OnInit {
 
       return matchesCategory && matchesBrand;
     });
+  }
+
+  onEmployeeSearch(searchTerm: string) {
+    if (!searchTerm) {
+      this.filteredEmployees = this.employees;
+    } else {
+      this.filteredEmployees = this.employees.filter(employee =>
+        employee.firstName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
   }
 }
