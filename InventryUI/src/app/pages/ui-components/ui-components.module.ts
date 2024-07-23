@@ -31,6 +31,8 @@ import { EmployeeComponent } from './employee/employee.component';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
 import { UpdateEmployeeComponent } from './employee/update-employee/update-employee.component';
 import { OfficeComponent } from './office/office.component';
+import { AddOfficeComponent } from './office/add-office/add-office.component';
+import { UpdateOfficeComponent } from './office/update-office/update-office.component';
 
 @NgModule({
   imports: [
@@ -72,7 +74,9 @@ import { OfficeComponent } from './office/office.component';
     EmployeeComponent,
     AddEmployeeComponent,
     UpdateEmployeeComponent,
-    OfficeComponent
+    OfficeComponent,
+    AddOfficeComponent,
+    UpdateOfficeComponent
     
   ],
 })

@@ -55,13 +55,8 @@ export const navItems: NavItem[] = [
     children: [
       {
         displayName: 'Assign Devices',
-        iconName: 'device-hub',
+        iconName: 'switch-3',
         route: '/device-assignment/assign',
-      },
-      {
-        displayName: 'Assigned Devices',
-        iconName: 'assignment',
-        route: '/device-assignment/list',
       },
     ],
   },
@@ -78,7 +73,7 @@ export const navItems: NavItem[] = [
       {
         displayName: 'Offices',
         iconName: 'building',
-        route: '/ui-components/offices',
+        route: '/ui-components/office',
       },
     ],
   },

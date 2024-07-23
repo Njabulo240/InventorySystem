@@ -20,6 +20,9 @@ import { UpdateUserComponent } from './users/update-user/update-user.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
 import { UpdateEmployeeComponent } from './employee/update-employee/update-employee.component';
+import { OfficeComponent } from './office/office.component';
+import { AddOfficeComponent } from './office/add-office/add-office.component';
+import { UpdateOfficeComponent } from './office/update-office/update-office.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -45,6 +48,9 @@ export const UiComponentsRoutes: Routes = [
       {path: 'employee',component: EmployeeComponent, },
       { path: 'add-employee', component: AddEmployeeComponent },
       { path: 'update-employee/:id', component: UpdateEmployeeComponent },
+      {path: 'office',component: OfficeComponent, },
+      { path: 'add-office', component:AddOfficeComponent },
+      { path: 'update-office/:id', component: UpdateOfficeComponent },
     ],
   },
 ];
