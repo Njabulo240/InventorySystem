@@ -21,6 +21,16 @@ namespace Repository
             Delete(device);
         }
 
+        public async Task<IEnumerable<Device>> GetAllAvailableDevicesAsync(bool trackChanges)
+        {
+            return await FindAll(trackChanges).OrderBy(ow => ow.Name)
+      .Include(d => d.Category)
+      .Include(d => d.Brand)
+      .Include(d => d.Supplier)
+      .Where(d => d.IsAvailable == true)
+     .ToListAsync();
+        }
+
         public async Task<IEnumerable<Device>> GetAllDevicesAsync(bool trackChanges)
         {
             return await FindAll(trackChanges).OrderBy(ow => ow.Name)
