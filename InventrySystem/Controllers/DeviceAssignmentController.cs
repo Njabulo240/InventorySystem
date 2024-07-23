@@ -87,6 +87,20 @@ namespace InventrySystem.Controllers
 
                 var createdDeviceAssignment = _mapper.Map<DeviceAssignmentDto>(deviceAssignmentEntity);
 
+                // update device here
+                var device = await _repository.Device.GetDeviceByIdAsync(deviceAssignment.DeviceId, trackChanges: false);
+                if (device == null)
+                {
+                    _logger.LogError($"Device with id: {deviceAssignment.DeviceId}, hasn't been found in db.");
+                    return NotFound("Device not found");
+                }
+
+                device.IsAvailable = false;
+                _repository.Device.UpdateDevice(device);
+                _repository.SaveAsync();
+
+
+
                 return CreatedAtRoute("DeviceAssignmentById", new { id = createdDeviceAssignment.Id }, createdDeviceAssignment);
             }
             catch (Exception ex)
@@ -148,6 +162,8 @@ namespace InventrySystem.Controllers
 
                 _repository.DeviceAssignment.DeleteDeviceAssignment(deviceAssignment);
                 _repository.SaveAsync();
+
+
 
                 return NoContent();
             }

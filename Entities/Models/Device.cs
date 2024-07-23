@@ -12,7 +12,7 @@
         public Guid SupplierId { get; set; }
         public Supplier? Supplier { get; set; }
         public bool IsFaulty { get; set; }
-        public bool IsAvailable { get; set; }
+        public bool IsAvailable { get; set; } = true;
         public DeviceAssignment? CurrentAssignment { get; set; }
         public List<MaintenanceSchedule>? MaintenanceSchedules { get; set; }
         public List<ServiceHistory>? ServiceHistories { get; set; }

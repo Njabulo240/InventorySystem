@@ -46,6 +46,11 @@ namespace Shared.DTO.Device
         public bool IsFaulty { get; set; }
     }
 
+    public class DeviceForAvailableUpdateDto
+    {
+        public bool IsAvailable { get; set; } = false;
+    }
+
     public class DeviceDto
     {
         public Guid Id { get; set; }
