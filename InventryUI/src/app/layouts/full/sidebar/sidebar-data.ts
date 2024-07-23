@@ -38,7 +38,7 @@ export const navItems: NavItem[] = [
     children: [
       {
         displayName: 'Roles',
-        iconName: 'user-check',
+        iconName: 'circle-key',
         route: '/ui-components/roles',
       },
       {

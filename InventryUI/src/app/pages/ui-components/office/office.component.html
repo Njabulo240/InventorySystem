@@ -20,6 +20,15 @@
           <th mat-header-cell *matHeaderCellDef> Location </th>
           <td mat-cell *matCellDef="let element"> {{element.location}} </td>
         </ng-container>
+
+        <ng-container matColumnDef="devices">
+          <th mat-header-cell *matHeaderCellDef> devices </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="accent" >
+              <mat-icon class="mat-18">devices</mat-icon>
+            </button>
+          </td>
+        </ng-container>
         
         <ng-container matColumnDef="update">
           <th mat-header-cell *matHeaderCellDef> Update </th>

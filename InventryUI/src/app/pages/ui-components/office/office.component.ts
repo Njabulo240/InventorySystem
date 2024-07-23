@@ -20,7 +20,7 @@ export class OfficeComponent implements OnInit {
 
   public errorMessage: string = '';
   public bsModalRef?: BsModalRef;
-  public displayedColumns = ['name', 'location', 'update', 'delete'];
+  public displayedColumns = ['name', 'location', 'devices', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Office>();
 
   @ViewChild(MatSort) sort: MatSort;

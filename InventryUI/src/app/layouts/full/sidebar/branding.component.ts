@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-branding',
   template: `
     <div class="branding">
- <h1>Inventry</h1>
+ <h1>Inventory</h1>
     </div>
   `,
 })

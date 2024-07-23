@@ -20,7 +20,7 @@ export class EmployeeComponent implements OnInit {
 
   public errorMessage: string = '';
   public bsModalRef?: BsModalRef;
-  public displayedColumns = ['firstName', 'lastName', 'employeeNumber', 'position', 'email', 'update', 'delete'];
+  public displayedColumns = ['firstName', 'lastName', 'employeeNumber', 'position', 'email','devices', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Employee>();
 
   @ViewChild(MatSort) sort: MatSort;
