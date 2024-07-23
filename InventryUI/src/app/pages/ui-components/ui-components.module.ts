@@ -37,6 +37,8 @@ import { AssignDeviceComponent } from './assign/assign-device/assign-device.comp
 import { AssignOfficeComponent } from './assign/assign-office/assign-office.component';
 import { OfficeDetailsComponent } from './office/office-details/office-details.component';
 import { EmployeeDetailsComponent } from './employee/employee-details/employee-details.component';
+import { FaultyDeviceComponent } from './faulty-device/faulty-device.component';
+import { UpdateFaultyComponent } from './faulty-device/update-faulty/update-faulty.component';
 
 @NgModule({
   imports: [
@@ -84,7 +86,9 @@ import { EmployeeDetailsComponent } from './employee/employee-details/employee-d
     AssignDeviceComponent,
     AssignOfficeComponent,
     OfficeDetailsComponent,
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    FaultyDeviceComponent,
+    UpdateFaultyComponent
     
   ],
 })

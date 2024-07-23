@@ -100,7 +100,7 @@ export const navItems: NavItem[] = [
       {
         displayName: 'Faulty Devices',
         iconName: 'alert-triangle',
-        route: '/inventory/faulty-devices',
+        route: '/ui-components/faulty-device',
       },
     ],
   },

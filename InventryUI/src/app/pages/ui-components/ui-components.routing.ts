@@ -27,6 +27,8 @@ import { AssignDeviceComponent } from './assign/assign-device/assign-device.comp
 import { AssignOfficeComponent } from './assign/assign-office/assign-office.component';
 import { EmployeeDetailsComponent } from './employee/employee-details/employee-details.component';
 import { OfficeDetailsComponent } from './office/office-details/office-details.component';
+import { FaultyDeviceComponent } from './faulty-device/faulty-device.component';
+import { UpdateFaultyComponent } from './faulty-device/update-faulty/update-faulty.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -59,6 +61,8 @@ export const UiComponentsRoutes: Routes = [
       {path: 'assign-office',component: AssignOfficeComponent },
       {path: 'employee-device/:id',component: EmployeeDetailsComponent },
       {path: 'office-device/:id',component: OfficeDetailsComponent },
+      {path: 'faulty-device',component: FaultyDeviceComponent },
+      { path: 'update-fault/:id', component: UpdateFaultyComponent },
     ],
   },
 ];
