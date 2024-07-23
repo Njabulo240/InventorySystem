@@ -1,0 +1,45 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%" class="b-1 shadow-none">
+    <mat-card-header>
+      <mat-card-title>Create a new employee</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="employeeForm" autocomplete="off" novalidate (ngSubmit)="createEmployee(employeeForm.value)">
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="First Name" formControlName="firstName" id="firstName">
+          <mat-hint align="end">Not more than 50 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('firstName', 'required')">First name is required</mat-error>
+          <mat-error *ngIf="hasError('firstName', 'maxlength')">You have more than 50 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="Last Name" formControlName="lastName" id="lastName">
+          <mat-hint align="end">Not more than 50 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('lastName', 'required')">Last name is required</mat-error>
+          <mat-error *ngIf="hasError('lastName', 'maxlength')">You have more than 50 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="Employee Number" formControlName="employeeNumber" id="employeeNumber">
+          <mat-hint align="end">Not more than 20 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('employeeNumber', 'required')">Employee number is required</mat-error>
+          <mat-error *ngIf="hasError('employeeNumber', 'maxlength')">You have more than 20 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="Position" formControlName="position" id="position">
+          <mat-hint align="end">Not more than 50 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('position', 'required')">Position is required</mat-error>
+          <mat-error *ngIf="hasError('position', 'maxlength')">You have more than 50 characters</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="email" placeholder="Email" formControlName="email" id="email">
+          <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">Invalid email format</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" class="w-100 action-button" [disabled]="!employeeForm.valid">Create</button>
+        <button type="button" mat-flat-button color="warn" class="w-100" (click)="redirectToEmployeeList()">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
+

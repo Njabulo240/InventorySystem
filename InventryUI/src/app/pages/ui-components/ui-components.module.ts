@@ -27,6 +27,10 @@ import { DeviceComponent } from './device/device.component';
 import { AddDeviceComponent } from './device/add-device/add-device.component';
 import { UpdateDeviceComponent } from './device/update-device/update-device.component';
 import { UpdateUserRoleComponent } from './users/update-user-role/update-user-role.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
+import { UpdateEmployeeComponent } from './employee/update-employee/update-employee.component';
+import { OfficeComponent } from './office/office.component';
 
 @NgModule({
   imports: [
@@ -64,7 +68,11 @@ import { UpdateUserRoleComponent } from './users/update-user-role/update-user-ro
     DeviceComponent,
     AddDeviceComponent,
     UpdateDeviceComponent,
-    UpdateUserRoleComponent
+    UpdateUserRoleComponent,
+    EmployeeComponent,
+    AddEmployeeComponent,
+    UpdateEmployeeComponent,
+    OfficeComponent
     
   ],
 })

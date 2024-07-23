@@ -73,12 +73,12 @@ export const navItems: NavItem[] = [
       {
         displayName: 'Employees',
         iconName: 'users',
-        route: '/employee-office/employees',
+        route: '/ui-components/employee',
       },
       {
         displayName: 'Offices',
         iconName: 'building',
-        route: '/employee-office/offices',
+        route: '/ui-components/offices',
       },
     ],
   },

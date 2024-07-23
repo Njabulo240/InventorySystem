@@ -17,6 +17,9 @@ import { UpdateDeviceComponent } from './device/update-device/update-device.comp
 import { UpdateRoleComponent } from './roles/update-role/update-role.component';
 import { UpdateUserRoleComponent } from './users/update-user-role/update-user-role.component';
 import { UpdateUserComponent } from './users/update-user/update-user.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
+import { UpdateEmployeeComponent } from './employee/update-employee/update-employee.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -39,6 +42,9 @@ export const UiComponentsRoutes: Routes = [
       {path: 'device',component: DeviceComponent, },
       { path: 'add-device', component: AddDeviceComponent },
       { path: 'update-device/:id', component: UpdateDeviceComponent },
+      {path: 'employee',component: EmployeeComponent, },
+      { path: 'add-employee', component: AddEmployeeComponent },
+      { path: 'update-employee/:id', component: UpdateEmployeeComponent },
     ],
   },
 ];
