@@ -62,6 +62,7 @@ export class AssignDeviceComponent implements OnInit {
         this.employees = res as any[];
         this.filteredEmployees = this.employees;
       }, err => this.errorHandler.handleError(err));
+      
 
     this.repository.getData('api/categories')
       .subscribe(res => this.categories = res as any[], err => this.errorHandler.handleError(err));
@@ -97,7 +98,7 @@ export class AssignDeviceComponent implements OnInit {
           const config: ModalOptions = {
             initialState: {
               modalHeaderText: 'Success Message',
-              modalBodyText: `Device Assignment created successfully`,
+              modalBodyText: `Device Assigned successfully`,
               okButtonText: 'OK'
             }
           };
@@ -110,6 +111,7 @@ export class AssignDeviceComponent implements OnInit {
         }
       });
   }
+
 
   redirectToDeviceAssignmentList(): void {
     this.loadDropdownData();

@@ -14,6 +14,17 @@ namespace Shared.DTO.DeviceAssignment
         public DateTime AssignedDate { get; set; } = DateTime.Now;
     }
 
+    public class DeviceAssignmentForOfficeDto
+    {
+        [Required(ErrorMessage = "Device ID is required")]
+        public Guid DeviceId { get; set; }
+
+        [Required(ErrorMessage = "Office ID is required")]
+        public Guid OfficeId { get; set; }
+
+        [Required(ErrorMessage = "Assigned Date is required")]
+        public DateTime AssignedDate { get; set; } = DateTime.Now;
+    }
     public class DeviceAssignmentForUpdateDto
     {
         [Required(ErrorMessage = "Device ID is required")]

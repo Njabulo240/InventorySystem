@@ -50,13 +50,18 @@ export const navItems: NavItem[] = [
   },
 
   {
-    displayName: 'Device Assignment',
+    displayName: 'Assign Device',
     iconName: 'devices',
     children: [
+      { 
+        displayName: 'Assign to Employee',
+        iconName: 'users',
+        route: '/ui-components/assign-employee',
+      },
       {
-        displayName: 'Assign Devices',
-        iconName: 'switch-3',
-        route: '/ui-components/assign-device',
+        displayName: 'Assign to Office',
+        iconName: 'building-estate',
+        route: '/ui-components/assign-office',
       },
     ],
   },

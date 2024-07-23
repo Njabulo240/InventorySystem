@@ -51,6 +51,7 @@ namespace InventrySystem
 
             CreateMap<DeviceAssignment, DeviceAssignmentDto>();
             CreateMap<DeviceAssignmentForCreationDto, DeviceAssignment>();
+            CreateMap<DeviceAssignmentForOfficeDto, DeviceAssignment>();
             CreateMap<DeviceAssignmentForUpdateDto, DeviceAssignment>();
 
             CreateMap<MaintenanceSchedule, MaintenanceScheduleDto>();
