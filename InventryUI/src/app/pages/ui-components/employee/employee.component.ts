@@ -84,5 +84,7 @@ export class EmployeeComponent implements OnInit {
         }
       });
   }
-
+  public redirectToDetails = (id: string) => {
+    this.router.navigate([`/ui-components/employee-device/${id}`]);
+  }
 }

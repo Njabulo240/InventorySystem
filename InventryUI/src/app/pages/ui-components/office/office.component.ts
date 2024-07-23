@@ -84,5 +84,7 @@ export class OfficeComponent implements OnInit {
         }
       });
   }
-
+  public redirectToDetails = (id: string) => {
+    this.router.navigate([`/ui-components/office-device/${id}`]);
+  }
 }

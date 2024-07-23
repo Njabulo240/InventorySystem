@@ -145,4 +145,5 @@ export class AssignDeviceComponent implements OnInit {
       );
     }
   }
+
 }

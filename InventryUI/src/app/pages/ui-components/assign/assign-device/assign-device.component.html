@@ -18,7 +18,7 @@
                 <mat-select formControlName="category">
                   <mat-option value="">All Categories</mat-option>
                   <mat-option *ngFor="let category of categories" [value]="category.name">
-                    {{ category.name }}
+                    {{ category.name }} 
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -38,7 +38,7 @@
               <mat-form-field appearance="outline" class="w-100" color="primary">
                 <mat-select placeholder="Select Device" formControlName="deviceId" id="deviceId">
                   <mat-option *ngFor="let device of filteredDevices" [value]="device.id">
-                    {{ device.name }}
+                    {{ device.name }} ,  {{ device.brandName }}  , {{ device.categoryName }}
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="hasError('deviceId', 'required')">Device is required</mat-error>

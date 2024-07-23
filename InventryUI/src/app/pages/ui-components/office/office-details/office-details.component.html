@@ -1,0 +1,59 @@
+
+<!-- Error Message -->
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Office Details</mat-card-title>
+  </mat-card-header>
+
+  <div class="col-lg-4 col-sm-6">
+    <mat-card class="b-1 shadow-none">
+      <mat-card-content class="b-t-1">
+  <p><strong>Name:</strong> {{ officeDetails?.name }}</p>
+  <p><strong>Location:</strong> {{ officeDetails?.location }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card-content class="b-t-1">
+    <div class="table-responsive m-t-16">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Serial Number Column -->
+        <ng-container matColumnDef="serialNumber">
+          <th mat-header-cell *matHeaderCellDef> Serial Number </th>
+          <td mat-cell *matCellDef="let element"> {{ element.serialNumber }} </td>
+        </ng-container>
+    
+        <!-- Category Name Column -->
+        <ng-container matColumnDef="categoryName">
+          <th mat-header-cell *matHeaderCellDef> Category Name </th>
+          <td mat-cell *matCellDef="let element"> {{ element.categoryName }} </td>
+        </ng-container>
+    
+        <!-- Brand Name Column -->
+        <ng-container matColumnDef="brandName">
+          <th mat-header-cell *matHeaderCellDef> Brand Name </th>
+          <td mat-cell *matCellDef="let element"> {{ element.brandName }} </td>
+        </ng-container>
+    
+        <!-- Device Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Device Name </th>
+          <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+        </ng-container>
+    
+        <!-- Assigned Date Column -->
+        <ng-container matColumnDef="assignedDate">
+          <th mat-header-cell *matHeaderCellDef> Assigned Date </th>
+          <td mat-cell *matCellDef="let element"> {{ element.assignedDate | date }} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

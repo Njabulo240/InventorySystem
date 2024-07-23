@@ -25,6 +25,8 @@ import { AddOfficeComponent } from './office/add-office/add-office.component';
 import { UpdateOfficeComponent } from './office/update-office/update-office.component';
 import { AssignDeviceComponent } from './assign/assign-device/assign-device.component';
 import { AssignOfficeComponent } from './assign/assign-office/assign-office.component';
+import { EmployeeDetailsComponent } from './employee/employee-details/employee-details.component';
+import { OfficeDetailsComponent } from './office/office-details/office-details.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -55,6 +57,8 @@ export const UiComponentsRoutes: Routes = [
       { path: 'update-office/:id', component: UpdateOfficeComponent },
       {path: 'assign-employee',component: AssignDeviceComponent },
       {path: 'assign-office',component: AssignOfficeComponent },
+      {path: 'employee-device/:id',component: EmployeeDetailsComponent },
+      {path: 'office-device/:id',component: OfficeDetailsComponent },
     ],
   },
 ];
