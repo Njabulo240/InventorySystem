@@ -87,16 +87,11 @@ export const navItems: NavItem[] = [
     displayName: 'Asset Management',
     iconName: 'settings',
     children: [
-      {
-        displayName: 'Maintenance',
-        iconName: 'calendar',
-        route: '/asset-management/maintenance',
-      },
-      {
-        displayName: 'Service History',
-        iconName: 'history',
-        route: '/asset-management/service-history',
-      },
+      // {
+      //   displayName: 'Maintenance',
+      //   iconName: 'calendar',
+      //   route: '/ui-components/maintenance',
+      // },
       {
         displayName: 'Faulty Devices',
         iconName: 'alert-triangle',

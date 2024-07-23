@@ -23,13 +23,12 @@
   </button>
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
     <mat-list-item>
-      <span matListItemTitle class="f-s-16 f-w-600">{{userName}}/{{userRole}}</span>
-      <span matListItemLine class="mat-body-1">{{email}}</span>
+      <span matListItemTitle class="f-s-16 f-w-600">{{userName}}</span>
+      <span matListItemLine class="mat-body-1">{{userRole}}</span>
     </mat-list-item>
     <button mat-menu-item  (click)="ChangePassword()">
       <mat-icon class="d-flex align-items-center"
-        ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
-       
+        ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon    
       >
       Change password
     </button>
