@@ -64,7 +64,7 @@ namespace InventrySystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMaintenanceSchedule([FromBody] MaintenanceScheduleForCreationDto maintenanceSchedule)
+        public IActionResult CreateMaintenanceSchedule([FromBody] MaintenanceScheduleForCreationDto maintenanceSchedule)
         {
             try
             {

@@ -23,15 +23,27 @@ namespace Repository
 
         public async Task<IEnumerable<Office>> GetAllOfficesAsync(bool trackChanges)
         {
-            return await FindAll(trackChanges).OrderBy(b => b.Name)
-                 .Include(e => e.DeviceAssignments)
-                .ToListAsync();
+            return await FindAll(trackChanges)
+              .OrderBy(b => b.Name)
+              .Include(e => e.DeviceAssignments)
+                  .ThenInclude(d => d.Device)
+                      .ThenInclude(dev => dev.Category)
+                  .Include(e => e.DeviceAssignments)
+                      .ThenInclude(d => d.Device)
+                          .ThenInclude(dev => dev.Brand)
+              .ToListAsync();
         }
 
         public async Task<Office> GetOfficeByIdAsync(Guid officeId, bool trackChanges)
         {
             return await FindByCondition(office => office.Id.Equals(officeId), trackChanges)
-             .Include(e => e.DeviceAssignments)
+            .OrderBy(b => b.Name)
+              .Include(e => e.DeviceAssignments)
+                  .ThenInclude(d => d.Device)
+                      .ThenInclude(dev => dev.Category)
+                  .Include(e => e.DeviceAssignments)
+                      .ThenInclude(d => d.Device)
+                          .ThenInclude(dev => dev.Brand)
              .FirstOrDefaultAsync();
         }
 

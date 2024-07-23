@@ -118,7 +118,7 @@ namespace InventrySystem.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetRoles()
+        public ActionResult GetRoles()
         {
             var roles = _roleManager.Roles.ToList();
             return Ok(roles);

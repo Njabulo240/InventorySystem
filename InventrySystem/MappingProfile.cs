@@ -49,7 +49,11 @@ namespace InventrySystem
             CreateMap<OfficeForCreationDto, Office>();
             CreateMap<OfficeForUpdateDto, Office>();
 
-            CreateMap<DeviceAssignment, DeviceAssignmentDto>();
+            CreateMap<DeviceAssignment, DeviceAssignmentDto>()
+                .ForMember(d => d.SerialNumber, opt => opt.MapFrom(src => src.Device.SerialNumber))
+                .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Device.Name))
+            .ForMember(d => d.CategoryName, opt => opt.MapFrom(src => src.Device.Category.Name))
+            .ForMember(d => d.BrandName, opt => opt.MapFrom(src => src.Device.Brand.Name));
             CreateMap<DeviceAssignmentForCreationDto, DeviceAssignment>();
             CreateMap<DeviceAssignmentForOfficeDto, DeviceAssignment>();
             CreateMap<DeviceAssignmentForUpdateDto, DeviceAssignment>();

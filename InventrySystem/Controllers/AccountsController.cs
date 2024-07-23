@@ -91,7 +91,7 @@ namespace InventrySystem.Controllers
                 return BadRequest("Invalid Request");
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var param = new Dictionary<string, string?>
+            var param = new Dictionary<string, string>
             {
                 {"token", token },
                 {"email", forgotPasswordDto.Email }
@@ -160,7 +160,7 @@ namespace InventrySystem.Controllers
 
                 return Ok(userDtos);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, "An error occurred while processing your request.");
             }
@@ -183,7 +183,7 @@ namespace InventrySystem.Controllers
 
                 return Ok(userDto);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, "An error occurred while processing your request.");
             }
@@ -214,7 +214,7 @@ namespace InventrySystem.Controllers
 
                 return BadRequest(result.Errors);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return StatusCode(500, "An error occurred while processing your request.");
@@ -240,7 +240,7 @@ namespace InventrySystem.Controllers
 
                 return BadRequest(result.Errors);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return StatusCode(500, "An error occurred while processing your request.");

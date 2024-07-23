@@ -64,7 +64,7 @@ namespace InventrySystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSupplier([FromBody] SupplierForCreationDto supplier)
+        public IActionResult CreateSupplier([FromBody] SupplierForCreationDto supplier)
         {
             try
             {

@@ -6,11 +6,11 @@ namespace Shared.DTO.Device
     {
         [Required(ErrorMessage = "Name is required")]
         [StringLength(60, ErrorMessage = "Name can't be longer than 60 characters")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required(ErrorMessage = "Serial Number is required")]
         [StringLength(100, ErrorMessage = "Serial Number can't be longer than 100 characters")]
-        public string SerialNumber { get; set; }
+        public string? SerialNumber { get; set; }
 
         [Required(ErrorMessage = "Category ID is required")]
         public Guid CategoryId { get; set; }
@@ -28,11 +28,11 @@ namespace Shared.DTO.Device
     {
         [Required(ErrorMessage = "Name is required")]
         [StringLength(60, ErrorMessage = "Name can't be longer than 60 characters")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required(ErrorMessage = "Serial Number is required")]
         [StringLength(100, ErrorMessage = "Serial Number can't be longer than 100 characters")]
-        public string SerialNumber { get; set; }
+        public string? SerialNumber { get; set; }
 
         [Required(ErrorMessage = "Category ID is required")]
         public Guid CategoryId { get; set; }

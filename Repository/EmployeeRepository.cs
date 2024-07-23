@@ -24,14 +24,25 @@ namespace Repository
         public async Task<IEnumerable<Employee>> GetAllEmployeesAsync(bool trackChanges)
         {
             return await FindAll(trackChanges).OrderBy(e => e.LastName)
-                .Include(e => e.DeviceAssignments)
+              .Include(e => e.DeviceAssignments)
+                  .ThenInclude(d => d.Device)
+                      .ThenInclude(dev => dev.Category)
+                  .Include(e => e.DeviceAssignments)
+                      .ThenInclude(d => d.Device)
+                          .ThenInclude(dev => dev.Brand)
                 .ToListAsync();
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(Guid employeeId, bool trackChanges)
         {
             return await FindByCondition(employee => employee.Id.Equals(employeeId), trackChanges)
-                                .Include(e => e.DeviceAssignments)
+
+              .Include(e => e.DeviceAssignments)
+                  .ThenInclude(d => d.Device)
+                      .ThenInclude(dev => dev.Category)
+                  .Include(e => e.DeviceAssignments)
+                      .ThenInclude(d => d.Device)
+                          .ThenInclude(dev => dev.Brand)
                                 .FirstOrDefaultAsync();
         }
 

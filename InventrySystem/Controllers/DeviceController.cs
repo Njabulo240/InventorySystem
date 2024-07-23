@@ -83,7 +83,7 @@ namespace InventrySystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDevice([FromBody] DeviceForCreationDto device)
+        public IActionResult CreateDevice([FromBody] DeviceForCreationDto device)
         {
             try
             {

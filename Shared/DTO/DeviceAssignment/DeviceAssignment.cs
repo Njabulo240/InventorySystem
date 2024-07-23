@@ -41,6 +41,10 @@ namespace Shared.DTO.DeviceAssignment
     {
         public Guid Id { get; set; }
         public Guid DeviceId { get; set; }
+        public string? SerialNumber { get; set; }
+        public string? CategoryName { get; set; }
+        public string? BrandName { get; set; }
+        public string? Name { get; set; }
         public Guid EmployeeId { get; set; }
         public DateTime AssignedDate { get; set; }
     }

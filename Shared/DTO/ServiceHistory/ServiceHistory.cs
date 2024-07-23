@@ -25,7 +25,7 @@ namespace Shared.DTO.ServiceHistory
 
         [Required(ErrorMessage = "Description is required")]
         [StringLength(200, ErrorMessage = "Description can't be longer than 200 characters")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 
     public class ServiceHistoryDto

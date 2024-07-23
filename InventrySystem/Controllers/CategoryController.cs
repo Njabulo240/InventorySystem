@@ -64,7 +64,7 @@ namespace InventrySystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCategory([FromBody] CategoryForCreationDto category)
+        public IActionResult CreateCategory([FromBody] CategoryForCreationDto category)
         {
             try
             {

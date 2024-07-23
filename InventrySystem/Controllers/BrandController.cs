@@ -64,7 +64,7 @@ namespace InventrySystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBrand([FromBody] BrandForCreationDto brand)
+        public IActionResult CreateBrand([FromBody] BrandForCreationDto brand)
         {
             try
             {

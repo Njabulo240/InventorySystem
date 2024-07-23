@@ -64,7 +64,7 @@ namespace InventrySystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateEmployee([FromBody] EmployeeForCreationDto employee)
+        public IActionResult CreateEmployee([FromBody] EmployeeForCreationDto employee)
         {
             try
             {

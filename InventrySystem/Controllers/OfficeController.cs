@@ -64,7 +64,7 @@ namespace InventrySystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOffice([FromBody] OfficeForCreationDto office)
+        public IActionResult CreateOffice([FromBody] OfficeForCreationDto office)
         {
             try
             {

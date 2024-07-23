@@ -64,7 +64,7 @@ namespace InventrySystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateServiceHistory([FromBody] ServiceHistoryForCreationDto serviceHistory)
+        public IActionResult CreateServiceHistory([FromBody] ServiceHistoryForCreationDto serviceHistory)
         {
             try
             {
