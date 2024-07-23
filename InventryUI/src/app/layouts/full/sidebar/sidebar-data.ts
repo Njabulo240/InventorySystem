@@ -56,7 +56,7 @@ export const navItems: NavItem[] = [
       {
         displayName: 'Assign Devices',
         iconName: 'switch-3',
-        route: '/device-assignment/assign',
+        route: '/ui-components/assign-device',
       },
     ],
   },

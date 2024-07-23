@@ -11,7 +11,7 @@ namespace Shared.DTO.DeviceAssignment
         public Guid EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Assigned Date is required")]
-        public DateTime AssignedDate { get; set; }
+        public DateTime AssignedDate { get; set; } = DateTime.Now;
     }
 
     public class DeviceAssignmentForUpdateDto

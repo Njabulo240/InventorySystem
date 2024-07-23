@@ -33,6 +33,7 @@ import { UpdateEmployeeComponent } from './employee/update-employee/update-emplo
 import { OfficeComponent } from './office/office.component';
 import { AddOfficeComponent } from './office/add-office/add-office.component';
 import { UpdateOfficeComponent } from './office/update-office/update-office.component';
+import { AssignDeviceComponent } from './assign-device/assign-device.component';
 
 @NgModule({
   imports: [
@@ -76,7 +77,8 @@ import { UpdateOfficeComponent } from './office/update-office/update-office.comp
     UpdateEmployeeComponent,
     OfficeComponent,
     AddOfficeComponent,
-    UpdateOfficeComponent
+    UpdateOfficeComponent,
+    AssignDeviceComponent
     
   ],
 })
