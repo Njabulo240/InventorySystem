@@ -22,8 +22,21 @@ namespace Repository.Configuration
                     SecurityStamp = string.Empty,
                     FirstName = "John",
                     LastName = "Doe"
-                }
-                // Add more users as needed
+                },
+                 new User
+                 {
+                     Id = "d7930984-3648-45c8-b33e-7b902e1166b4",
+                     UserName = "user2@example.com",
+                     NormalizedUserName = "USER2@EXAMPLE.COM",
+                     Email = "user2@example.com",
+                     NormalizedEmail = "USER2@EXAMPLE.COM",
+                     EmailConfirmed = true,
+                     PasswordHash = new PasswordHasher<User>().HashPassword(null, "Password.123"),
+                     SecurityStamp = string.Empty,
+                     FirstName = "John2",
+                     LastName = "Doe2"
+                 }
+            // Add more users as needed
             );
         }
     }

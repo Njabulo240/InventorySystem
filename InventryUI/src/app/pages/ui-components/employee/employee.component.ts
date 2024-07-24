@@ -6,7 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Employee } from 'src/app/_interface/inventory/employee';
+import { ErrorModalComponent } from 'src/app/shared/modals/error-modal/error-modal.component';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
@@ -31,7 +33,8 @@ export class EmployeeComponent implements OnInit {
     private errorService: RepositoryErrorHandlerService,
     private router: Router,
     private dialogService: DialogService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -64,7 +67,8 @@ export class EmployeeComponent implements OnInit {
   }
 
   public deleteEmployee(id: string) {
-    this.dialogService.openConfirmDialog('Are you sure you want to delete this employee?')
+    if(this.authService.isUserAdmin()){
+      this.dialogService.openConfirmDialog('Are you sure you want to delete this employee?')
       .afterClosed()
       .subscribe(res => {
         if (res) {
@@ -83,6 +87,17 @@ export class EmployeeComponent implements OnInit {
           });
         }
       });
+    }else{
+      const config: ModalOptions = {
+        initialState: {
+          modalHeaderText: 'Error Message',
+          modalBodyText: 'Only Admin allowed',
+          okButtonText: 'OK'
+        }
+      };
+     this.modalService.show(ErrorModalComponent, config);
+    }
+    
   }
   public redirectToDetails = (id: string) => {
     this.router.navigate([`/ui-components/employee-device/${id}`]);

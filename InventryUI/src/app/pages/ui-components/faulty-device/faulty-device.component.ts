@@ -9,7 +9,9 @@ import { Brand } from 'src/app/_interface/inventory/brand';
 import { Category } from 'src/app/_interface/inventory/category';
 import { Device } from 'src/app/_interface/inventory/device';
 import { Supplier } from 'src/app/_interface/inventory/supplier';
+import { ErrorModalComponent } from 'src/app/shared/modals/error-modal/error-modal.component';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
@@ -17,7 +19,7 @@ import { RepositoryService } from 'src/app/shared/services/repository.service';
 @Component({
   selector: 'app-faulty-device',
   templateUrl: './faulty-device.component.html',
-  styleUrls: ['./faulty-device.component.css']
+  styleUrls: ['./faulty-device.component.css'],
 })
 export class FaultyDeviceComponent implements OnInit {
   public categories: Category[] = [];
@@ -25,7 +27,15 @@ export class FaultyDeviceComponent implements OnInit {
   public suppliers: Supplier[] = [];
   public filterForm: FormGroup;
   public errorMessage: string = '';
-  public displayedColumns = ['name', 'serialNumber', 'categoryName', 'brandName', 'supplierName', 'isFaulty', 'actions'];
+  public displayedColumns = [
+    'name',
+    'serialNumber',
+    'categoryName',
+    'brandName',
+    'supplierName',
+    'isFaulty',
+    'actions',
+  ];
   public dataSource = new MatTableDataSource<Device>();
   private allDevices: Device[] = [];
   public bsModalRef?: BsModalRef;
@@ -39,46 +49,47 @@ export class FaultyDeviceComponent implements OnInit {
     private errorService: RepositoryErrorHandlerService,
     private dialogService: DialogService,
     private modal: BsModalService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.filterForm = this.fb.group({
       category: [''],
       brand: [''],
-      supplier: ['']
+      supplier: [''],
     });
 
     this.loadDropdownData();
     this.getAllDevices();
-    
+
     this.filterForm.valueChanges.subscribe(() => {
       this.applyFilter();
     });
   }
 
   private loadDropdownData = () => {
-    this.repoService.getData('api/categories').subscribe(
-      res => this.categories = res as Category[]
-    );
+    this.repoService
+      .getData('api/categories')
+      .subscribe((res) => (this.categories = res as Category[]));
 
-    this.repoService.getData('api/brands').subscribe(
-      res => this.brands = res as Brand[]
-    );
+    this.repoService
+      .getData('api/brands')
+      .subscribe((res) => (this.brands = res as Brand[]));
 
-    this.repoService.getData('api/suppliers').subscribe(
-      res => this.suppliers = res as Supplier[]
-    );
-  }
+    this.repoService
+      .getData('api/suppliers')
+      .subscribe((res) => (this.suppliers = res as Supplier[]));
+  };
 
   private getAllDevices() {
     this.repoService.getData('api/devices/fault').subscribe(
-      res => {
+      (res) => {
         this.allDevices = res as Device[];
         this.dataSource.data = this.allDevices;
         this.applyFilter();
       },
-      error => {
+      (error) => {
         this.errorMessage = 'Failed to load devices. Please try again later.';
         console.error('Error fetching devices:', error);
       }
@@ -89,10 +100,12 @@ export class FaultyDeviceComponent implements OnInit {
     const filters = this.filterForm.value;
 
     // Filter devices based on selected filters
-    const filteredDevices = this.allDevices.filter(device => {
-      const matchesCategory = !filters.category || device.categoryName === filters.category;
+    const filteredDevices = this.allDevices.filter((device) => {
+      const matchesCategory =
+        !filters.category || device.categoryName === filters.category;
       const matchesBrand = !filters.brand || device.brandName === filters.brand;
-      const matchesSupplier = !filters.supplier || device.supplierName === filters.supplier;
+      const matchesSupplier =
+        !filters.supplier || device.supplierName === filters.supplier;
 
       return matchesCategory && matchesBrand && matchesSupplier;
     });
@@ -109,7 +122,7 @@ export class FaultyDeviceComponent implements OnInit {
   }
 
   public redirectToUpdate(id: string) {
-   this.router.navigate([`/ui-components/update-fault/${id}`]);
+    this.router.navigate([`/ui-components/update-fault/${id}`]);
   }
 
   ngAfterViewInit() {
@@ -118,27 +131,37 @@ export class FaultyDeviceComponent implements OnInit {
   }
 
   public deleteDevice = (id: string) => {
-    this.dialogService.openConfirmDialog('Are you sure you want to delete this device?')
-      .afterClosed()
-      .subscribe(res => {
-        if (res) {
-          this.repoService.delete(`api/devices/${id}`).subscribe(() => {
-            const config: ModalOptions = {
-              initialState: {
-                modalHeaderText: 'Success Message',
-                modalBodyText: `Device deleted successfully`,
-                okButtonText: 'OK'
-              }
-            };
+    if (this.authService.isUserAdmin()) {
+      this.dialogService
+        .openConfirmDialog('Are you sure you want to delete this device?')
+        .afterClosed()
+        .subscribe((res) => {
+          if (res) {
+            this.repoService.delete(`api/devices/${id}`).subscribe(() => {
+              const config: ModalOptions = {
+                initialState: {
+                  modalHeaderText: 'Success Message',
+                  modalBodyText: `Device deleted successfully`,
+                  okButtonText: 'OK',
+                },
+              };
 
-            this.bsModalRef = this.modal.show(SuccessModalComponent, config);
-            this.bsModalRef.content.redirectOnOk.subscribe(() => 
-              this.getAllDevices()
-            
-            );
-          });
-        }
-      });
-  }
-
+              this.bsModalRef = this.modal.show(SuccessModalComponent, config);
+              this.bsModalRef.content.redirectOnOk.subscribe(() =>
+                this.getAllDevices()
+              );
+            });
+          }
+        });
+    } else {
+      const config: ModalOptions = {
+        initialState: {
+          modalHeaderText: 'Error Message',
+          modalBodyText: 'Only Admin allowed',
+          okButtonText: 'OK',
+        },
+      };
+      this.modal.show(ErrorModalComponent, config);
+    }
+  };
 }
