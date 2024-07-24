@@ -22,6 +22,8 @@ namespace Repository
             modelBuilder.ApplyConfiguration(new BrandConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleAssignmentConfiguration());
 
             modelBuilder.Entity<Device>()
            .HasOne(d => d.Category)

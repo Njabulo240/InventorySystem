@@ -12,8 +12,8 @@ using Repository;
 namespace InventrySystem.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240711160154_InitialData4")]
-    partial class InitialData4
+    [Migration("20240724061911_InitialData")]
+    partial class InitialData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,6 +94,72 @@ namespace InventrySystem.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a2bd32c0-d75e-4966-8274-758e273da3fb",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "73a311cb-57c1-4802-8db7-f0a637971240",
+                            Email = "user@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "John",
+                            LastName = "Doe",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@EXAMPLE.COM",
+                            NormalizedUserName = "USER@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOZ76Qz6saa60jCZtKwlNkVeF0YmeA6gR7Sv5AY2AeSlHEa7L5hg+2tk/4aG0edcog==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "user@example.com"
+                        });
+                });
+
+            modelBuilder.Entity("Entities.Identity.UserRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cfa9978f-2afd-4786-9cf9-97b4493f4d34",
+                            DateCreated = new DateTime(2015, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "6a670f0d-a08f-4bba-b1fd-9b6df6e42d70",
+                            DateCreated = new DateTime(2015, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Entities.Models.Brand", b =>
@@ -103,7 +169,6 @@ namespace InventrySystem.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -160,7 +225,6 @@ namespace InventrySystem.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -222,15 +286,16 @@ namespace InventrySystem.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsFaulty")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SerialNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("SupplierId")
@@ -249,9 +314,10 @@ namespace InventrySystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("575fc099-9a72-437f-a24e-7575b9611ce0"),
+                            Id = new Guid("3cffec65-6a2c-460c-8072-60cfe692c19d"),
                             BrandId = new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"),
                             CategoryId = new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"),
+                            IsAvailable = true,
                             IsFaulty = false,
                             Name = "Laptop X1",
                             SerialNumber = "SN123456",
@@ -259,9 +325,10 @@ namespace InventrySystem.Migrations
                         },
                         new
                         {
-                            Id = new Guid("26de0309-bf74-4691-a693-98412c21b1a5"),
+                            Id = new Guid("b764457b-84c1-46d0-8e84-42782c0f7355"),
                             BrandId = new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"),
                             CategoryId = new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"),
+                            IsAvailable = true,
                             IsFaulty = false,
                             Name = "Desktop Y2",
                             SerialNumber = "SN654321",
@@ -312,15 +379,18 @@ namespace InventrySystem.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("EmployeeNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Position")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -335,7 +405,6 @@ namespace InventrySystem.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("DeviceId")
@@ -361,11 +430,9 @@ namespace InventrySystem.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -380,14 +447,12 @@ namespace InventrySystem.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("GeneratedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -402,14 +467,12 @@ namespace InventrySystem.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("DeviceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PerformedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ServiceDate")
@@ -429,11 +492,9 @@ namespace InventrySystem.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ContactInfo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -476,47 +537,6 @@ namespace InventrySystem.Migrations
                             Id = new Guid("915d6ff3-f98f-4430-9bdd-dd8f23107670"),
                             ContactInfo = "Contact info for TelPro",
                             Name = "TelPro Eswatini"
-                        });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "412e5a6b-7f1a-48d3-8143-269a55983c90",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = "b2b335b5-c74f-42fd-b912-21cf4ce14d3b",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
                         });
                 });
 
@@ -702,7 +722,7 @@ namespace InventrySystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Entities.Identity.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -729,7 +749,7 @@ namespace InventrySystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Entities.Identity.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -763,8 +783,7 @@ namespace InventrySystem.Migrations
 
             modelBuilder.Entity("Entities.Models.Device", b =>
                 {
-                    b.Navigation("CurrentAssignment")
-                        .IsRequired();
+                    b.Navigation("CurrentAssignment");
 
                     b.Navigation("MaintenanceSchedules");
 

@@ -1,6 +1,4 @@
 using EmailService;
-using Entities.Identity;
-using InventrySystem;
 using InventrySystem.Extensions;
 using InventrySystem.JwtFeatures;
 using Microsoft.AspNetCore.Identity;
@@ -34,22 +32,6 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-    try
-    {
-        var userManager = services.GetRequiredService<UserManager<User>>();
-        await SeedingUsers.SeedUsers(userManager);
-    }
-    catch (Exception ex)
-    {
-        var logger = loggerFactory.CreateLogger<Program>();
-        logger.LogError(ex, "An error occurred during user seeding");
-    }
-}
 
 app.UseHttpsRedirection();
 
