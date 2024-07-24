@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Shared.DTO.Device;
 
 namespace Repository
 {
@@ -56,6 +57,17 @@ namespace Repository
             return await FindByCondition(device => device.Id.Equals(deviceId), trackChanges)
               .FirstOrDefaultAsync();
 
+        }
+
+        public async Task<IEnumerable<CategoryDeviceCountDto>> GetDeviceCountPerCategoryAsync(bool trackChanges)
+        {
+            return await FindAll(trackChanges)
+              .GroupBy(d => d.Category.Name)
+              .Select(g => new CategoryDeviceCountDto
+              {
+                  CategoryName = g.Key,
+                  TotalDevices = g.Count()
+              }).ToListAsync();
         }
 
         public async Task<Device> GetDeviceWithDetailsAsync(Guid deviceId, bool trackChanges)

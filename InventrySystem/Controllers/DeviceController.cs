@@ -76,6 +76,24 @@ namespace InventrySystem.Controllers
         }
 
 
+        [HttpGet("count")]
+        public async Task<IActionResult> GetDeviceCountPerCategory()
+        {
+            try
+            {
+                var categoryDeviceCounts = await _repository.Device.GetDeviceCountPerCategoryAsync(trackChanges: false);
+                _logger.LogInfo("Returned device counts per category from database.");
+
+                return Ok(categoryDeviceCounts);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetDeviceCountPerCategory action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
         [HttpGet("{id}", Name = "DeviceById")]
         public async Task<IActionResult> GetDeviceById(Guid id)
         {
