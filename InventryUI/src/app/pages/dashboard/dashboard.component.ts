@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { DeviceCategoryReport } from 'src/app/_interface/device';
+import { DeviceCategoryReport } from 'src/app/_interface/inventory/device';
 
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 

@@ -4,8 +4,12 @@ namespace Shared.DTO.User
 {
     public class UserForRegistrationDto
     {
+        // re
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+
+        [Required(ErrorMessage = "UserName is required.")]
+        public string? UserName { get; set; }
 
         [Required(ErrorMessage = "Email is required.")]
         public string? Email { get; set; }

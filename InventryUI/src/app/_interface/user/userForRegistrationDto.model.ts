@@ -19,6 +19,15 @@ export interface UserRoleDto {
     lastName: string;
     userName: string;
     email: string;
-    roles: string[] |any
+    password: string;
+    confirmPassword: string;
+}
+
+export interface UserForUpdateDto {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  email: string;
+  roles: string[] |any
 
 }

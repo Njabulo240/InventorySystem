@@ -5,13 +5,12 @@ import { Router } from '@angular/router';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Role } from 'src/app/_interface/role.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
+import { Role } from 'src/app/_interface/user/role.model';
 
 @Component({
   selector: 'app-roles',

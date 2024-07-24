@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { Employee } from 'src/app/_interface/employee';
+import { Employee } from 'src/app/_interface/inventory/employee';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';

@@ -11,3 +11,8 @@ export interface ChangePasswordDto {
     confirmPassword: string;
     email: string;
   }
+
+  export interface DefaultPasswordDto {
+    password: string;
+    confirmPassword: string;
+  }

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { Supplier } from 'src/app/_interface/supplier';
+import { Supplier } from 'src/app/_interface/inventory/supplier';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';

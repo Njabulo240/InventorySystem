@@ -1,21 +1,16 @@
 
 import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { UserDto } from 'src/app/_interface/user';
-import { AddUserComponent } from './add-user/add-user.component';
-import { MatDialog } from '@angular/material/dialog';
-import { UpdateUserComponent } from './update-user/update-user.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
-import { Subscription } from 'rxjs';
-import { DataService } from 'src/app/shared/services/data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
+import { UserDto } from 'src/app/_interface/user/userForRegistrationDto.model';
 
 @Component({
   selector: 'app-users',

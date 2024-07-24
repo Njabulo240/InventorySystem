@@ -20,7 +20,7 @@ namespace InventrySystem
         {
 
             CreateMap<UserForRegistrationDto, User>()
-                .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
+                        .ForMember(u => u.UserName, opt => opt.MapFrom(x => GenerateValidUserName(x.Email)));
 
             CreateMap<Device, DeviceDto>()
                 .ForMember(d => d.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
@@ -72,6 +72,15 @@ namespace InventrySystem
             CreateMap<UserForUpdateDto, User>();
             CreateMap<UserRoleForCreationDto, UserRole>();
             CreateMap<UserRoleForUpdateDto, UserRole>();
+        }
+        private string GenerateValidUserName(string email)
+        {
+            var atIndex = email.IndexOf('@');
+            if (atIndex > 0)
+            {
+                return email.Substring(0, atIndex);
+            }
+            return email;
         }
     }
 }

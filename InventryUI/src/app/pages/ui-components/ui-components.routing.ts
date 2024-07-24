@@ -29,12 +29,14 @@ import { EmployeeDetailsComponent } from './employee/employee-details/employee-d
 import { OfficeDetailsComponent } from './office/office-details/office-details.component';
 import { FaultyDeviceComponent } from './faulty-device/faulty-device.component';
 import { UpdateFaultyComponent } from './faulty-device/update-faulty/update-faulty.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
 
 export const UiComponentsRoutes: Routes = [
   {
     path: '',
     children: [
       {path: 'user', component: UsersComponent,},
+      {path: 'add-user', component: AddUserComponent,},
       { path: 'update-user/:id', component: UpdateUserComponent },
       {path: 'roles',component: RolesComponent, },
       { path: 'add-role', component: AddRoleComponent },

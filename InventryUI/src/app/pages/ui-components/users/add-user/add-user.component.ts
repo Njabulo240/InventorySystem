@@ -1,14 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
-import { UserForRegistrationDto, UserRoleDto } from 'src/app/_interface/user';
+import { Router } from '@angular/router';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { UserForRegistrationDto } from 'src/app/_interface/user/userForRegistrationDto.model';
+import { PasswordConfirmationValidatorService } from 'src/app/core/password-confirmation-validator.service';
+import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
+
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
-import { DataService } from 'src/app/shared/services/data.service';
-import { DialogService } from 'src/app/shared/services/dialog.service';
-import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
-import { RepositoryService } from 'src/app/shared/services/repository.service';
+
 
 @Component({
   selector: 'app-add-user',
@@ -16,95 +16,70 @@ import { RepositoryService } from 'src/app/shared/services/repository.service';
 
 })
 export class AddUserComponent implements OnInit {
-  dataForm: FormGroup |any;
-  roles:UserRoleDto []|any;
-  selectedRoles: string[] = [];
+  registerForm: FormGroup | any;
+  errorMessage: string = '';
+  showError: boolean;
+  public bsModalRef?: BsModalRef;
 
-  constructor( 
-    private repoService: RepositoryService,
-    private dataService: DataService,
-    private toastr: ToastrService,
-    private dialogserve: DialogService,
-    private authService: AuthenticationService,
-    private Ref: MatDialogRef<AddUserComponent>) {}
+  constructor(private authService: AuthenticationService, 
+    private passConfValidator: PasswordConfirmationValidatorService, private router: Router,
+    private modal: BsModalService) { }
 
-  ngOnInit() {
-    this.dataForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      lastName: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      userName: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+  ngOnInit(): void {
+    this.registerForm = new FormGroup({
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      confirm: new FormControl('')
     });
-
-    this.getRoles();
-
+    this.registerForm.get('confirm').setValidators([Validators.required, 
+    this.passConfValidator.validateConfirmPassword(this.registerForm.get('password'))]);
   }
-
-
 
   public validateControl = (controlName: string) => {
-    return this.dataForm?.get(controlName)?.invalid && this.dataForm?.get(controlName)?.touched
+    return this.registerForm.get(controlName).invalid && this.registerForm.get(controlName).touched
   }
+
   public hasError = (controlName: string, errorName: string) => {
-    return this.dataForm?.get(controlName)?.hasError(errorName)
+    return this.registerForm.get(controlName).hasError(errorName)
   }
 
-  public createData = (dataFormValue: any) => {
+  public registerUser = (registerFormValue:any) => {
+    this.showError = false;
+    const formValues = { ...registerFormValue };
 
-    if (this.dataForm.valid) {
-      this.executeDataCreation(dataFormValue);
-
-    }
-  };
-  private executeDataCreation = (dataFormValue: any) => {
-    let data: UserForRegistrationDto = {
-   
-      firstName: dataFormValue.firstName,
-      lastName: dataFormValue.lastName,
-      userName: dataFormValue.userName,
-      email: dataFormValue.email,
-      roles: this.selectedRoles
-
+    const user: UserForRegistrationDto = {
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+      userName: formValues.email,
+      email: formValues.email,
+      password: formValues.password,
+      confirmPassword: formValues.confirm
     };
 
-    const apiUri: string = `api/authentication`;
-    this.authService.registerUser(apiUri, data).subscribe(
-      (res:any) => {
+    this.authService.registerUser("api/accounts/registration", user)
+    .subscribe({
+      next: (response: any) => {
+        const config: ModalOptions = {
+          initialState: {
+            modalHeaderText: 'Success Message',
+            modalBodyText: `user created successfully`,
+            okButtonText: 'OK'
+          }
+        };
 
-
- 
+        this.bsModalRef = this.modal.show(SuccessModalComponent, config);
+        this.bsModalRef.content.redirectOnOk.subscribe((_: any) => this.redirectToUser());
       },
-      (error:HttpErrorResponse) => {
-
+      error: (err: HttpErrorResponse) => {
+        this.errorMessage = err.message;
+        this.showError = true;
       }
-    );
-  };
-
-  public getRoles(){
-    this.repoService.getData('api/roles')
-    .subscribe(res => {
-      this.roles = res as UserRoleDto[];
-      
-    },
-    (err) => {
-      this.toastr.success(err);
     })
   }
 
-  isSelected(roleName: string): boolean {
-    return this.selectedRoles.includes(roleName);
+  redirectToUser = () => {
+    this.router.navigate(['/ui-components/user']);
   }
-
-  toggleRoleSelection(event: any, roleName: string): void {
-    if (event.checked) {
-      this.selectedRoles.push(roleName);
-    } else {
-      this.selectedRoles = this.selectedRoles.filter(role => role !== roleName);
-    }
-  }
-
-  closeModal(){
-    this.Ref.close([]);
-  }
-
 }

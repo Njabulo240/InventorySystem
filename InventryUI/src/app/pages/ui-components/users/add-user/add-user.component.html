@@ -1,48 +1,45 @@
-<mat-card class="cardWithShadow theme-card modal-card">
-  <mat-card-header>
-    <mat-card-title class="m-b-0">Create user</mat-card-title>
-    <span class="flex-1-auto"></span>
-    <button mat-flat-button matTooltipPosition="left" class="m-l-8" matTooltipHideDelay="100000"
-      (click)="closeModal()">
-      <mat-icon color="warn">close</mat-icon>
-    </button>
-  </mat-card-header>
-  <mat-card-content class="b-t-1">
-    <form [formGroup]="dataForm" autocomplete="off" novalidate (ngSubmit)="createData(dataForm.value)">
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%" class="b-1 shadow-none">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="registerForm" autocomplete="off" novalidate (ngSubmit)="registerUser(registerForm.value)">
+      <mat-card-content>
+        <div *ngIf="showError" class="alert alert-danger" role="alert">
+          <span [innerHTML]="errorMessage"></span>
+        </div>
 
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstName" />
-      </mat-form-field>
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName" />
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="First Name" formControlName="firstName" id="firstName">
+          <mat-error *ngIf="validateControl('firstName') && hasError('firstName', 'required')">First Name is required</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>User Name</mat-label>
-        <input matInput formControlName="userName" />
-      </mat-form-field>
-      <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" />
-        <mat-error *ngIf="validateControl('email') && hasError('email', 'email')">Please provide a valid email</mat-error>
-        <mat-error *ngIf="validateControl('email') && hasError('email', 'required')">Email is required</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="text" placeholder="Last Name" formControlName="lastName" id="lastName">
+          <mat-error *ngIf="validateControl('lastName') && hasError('lastName', 'required')">Last Name is required</mat-error>
+        </mat-form-field>
 
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="email" placeholder="Email" formControlName="email" id="email">
+          <mat-error *ngIf="validateControl('email') && hasError('email', 'required')">Email is required</mat-error>
+          <mat-error *ngIf="validateControl('email') && hasError('email', 'email')">Please provide a valid email</mat-error>
+        </mat-form-field>
 
-      <mat-label>Roles</mat-label>
-      <div *ngFor="let role of roles">
-        <mat-checkbox [checked]="isSelected(role.name)" (change)="toggleRoleSelection($event, role.name)">
-          {{ role.name }}
-        </mat-checkbox>
-      </div>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="password" placeholder="Password" formControlName="password" id="password">
+          <mat-error *ngIf="validateControl('password') && hasError('password', 'required')">Password is required</mat-error>
+        </mat-form-field>
 
-
-
-      <button mat-flat-button color="primary" [disabled]="!dataForm.valid">
-        Save
-      </button>
+        <mat-form-field appearance="outline" class="w-100" color="primary">
+          <input matInput type="password" placeholder="Confirm Password" formControlName="confirm" id="confirm">
+          <mat-error *ngIf="validateControl('confirm') && hasError('confirm', 'required')">Confirmation is required</mat-error>
+          <mat-error *ngIf="hasError('confirm', 'mustMatch')">Passwords must match</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" class="w-100 action-button" [disabled]="!registerForm.valid">Register</button>
+        <button type="button" mat-flat-button color="warn" class="w-100" (click)="redirectToUser()">Cancel</button>
+      </mat-card-actions>
     </form>
-  </mat-card-content>
-</mat-card>
+  </mat-card>
+</section>

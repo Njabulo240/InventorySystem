@@ -5,11 +5,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { UserRoleDto, UserForRegistrationDto } from 'src/app/_interface/user';
+import { UserForUpdateDto, UserRoleDto } from 'src/app/_interface/user/userForRegistrationDto.model';
 import { SuccessModalComponent } from 'src/app/shared/modals/success-modal/success-modal.component';
-import { DataService } from 'src/app/shared/services/data.service';
-import { DialogService } from 'src/app/shared/services/dialog.service';
-import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 import { RepositoryErrorHandlerService } from 'src/app/shared/services/repository-error-handler.service';
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 
@@ -21,7 +18,7 @@ export class UpdateUserComponent implements OnInit {
   dataForm: FormGroup |any;
   roles:UserRoleDto []|any;
   selectedRoles: string[] = [];
-  user:UserForRegistrationDto |any;
+  user:UserForUpdateDto |any;
   private userId: string | null = '';
   public errorMessage: string = '';
   public bsModalRef?: BsModalRef;
@@ -64,7 +61,7 @@ export class UpdateUserComponent implements OnInit {
     }
   };
   private executeDataCreation = (dataFormValue: any) => {
-    let data: UserForRegistrationDto = {
+    let data: UserForUpdateDto = {
    
       firstName: dataFormValue.firstName,
       lastName: dataFormValue.lastName,
