@@ -61,13 +61,18 @@ namespace Repository
 
         public async Task<IEnumerable<CategoryDeviceCountDto>> GetDeviceCountPerCategoryAsync(bool trackChanges)
         {
-            return await FindAll(trackChanges)
-              .GroupBy(d => d.Category.Name)
-              .Select(g => new CategoryDeviceCountDto
-              {
-                  CategoryName = g.Key,
-                  TotalDevices = g.Count()
-              }).ToListAsync();
+            var result = await FindAll(trackChanges)
+                           .Include(d => d.Category)
+                           .GroupBy(d => d.Category.Name)
+                           .Select(g => new CategoryDeviceCountDto
+                           {
+                               CategoryName = g.Key,
+                               TotalDevices = g.Count(),
+                               Available = g.Count(d => d.IsAvailable),
+                               Faulty = g.Count(d => d.IsFaulty)
+                           }).ToListAsync();
+
+            return result;
         }
 
         public async Task<Device> GetDeviceWithDetailsAsync(Guid deviceId, bool trackChanges)

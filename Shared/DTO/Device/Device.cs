@@ -69,6 +69,8 @@ namespace Shared.DTO.Device
     {
         public string? CategoryName { get; set; }
         public int TotalDevices { get; set; }
+        public int Available { get; set; }
+        public int Faulty { get; set; }
     }
 
 }
