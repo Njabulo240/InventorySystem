@@ -14,7 +14,6 @@ namespace Repository
         private IDeviceAssignmentRepository _deviceAssignment;
         private IMaintenanceScheduleRepository _maintenanceSchedule;
         private IServiceHistoryRepository _serviceHistory;
-        private IReportRepository _report;
 
 
         public RepositoryManager(RepositoryContext repositoryContext)
@@ -137,19 +136,6 @@ namespace Repository
                 }
 
                 return _serviceHistory;
-            }
-        }
-
-        public IReportRepository Report
-        {
-            get
-            {
-                if (_report == null)
-                {
-                    _report = new ReportRepository(_repoContext);
-                }
-
-                return _report;
             }
         }
 

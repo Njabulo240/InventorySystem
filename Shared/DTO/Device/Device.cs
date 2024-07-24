@@ -65,4 +65,10 @@ namespace Shared.DTO.Device
         public bool IsFaulty { get; set; }
     }
 
+    public class CategoryDeviceCountDto
+    {
+        public string? CategoryName { get; set; }
+        public int TotalDevices { get; set; }
+    }
+
 }

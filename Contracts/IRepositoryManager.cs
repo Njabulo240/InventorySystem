@@ -11,7 +11,6 @@
         IDeviceAssignmentRepository DeviceAssignment { get; }
         IMaintenanceScheduleRepository MaintenanceSchedule { get; }
         IServiceHistoryRepository ServiceHistory { get; }
-        IReportRepository Report { get; }
         void SaveAsync();
     }
 }
