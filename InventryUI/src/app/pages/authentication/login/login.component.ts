@@ -23,8 +23,8 @@ export class AppSideLoginComponent {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      username: new FormControl("user@example.com", [Validators.required]),
-      password: new FormControl("Password.123", [Validators.required])
+      username: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required])
     })
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
