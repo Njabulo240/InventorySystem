@@ -24,6 +24,8 @@ namespace Repository
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new RoleAssignmentConfiguration());
+            modelBuilder.ApplyConfiguration(new OfficeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
 
             modelBuilder.Entity<Device>()
            .HasOne(d => d.Category)

@@ -366,7 +366,7 @@ namespace InventrySystem.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "a2bd32c0-d75e-4966-8274-758e273da3fb", 0, "73a311cb-57c1-4802-8db7-f0a637971240", "user@example.com", true, "John", "Doe", false, null, "USER@EXAMPLE.COM", "USER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEOZ76Qz6saa60jCZtKwlNkVeF0YmeA6gR7Sv5AY2AeSlHEa7L5hg+2tk/4aG0edcog==", null, false, "", false, "user@example.com" });
+                values: new object[] { "a2bd32c0-d75e-4966-8274-758e273da3fb", 0, "2ea1f06e-4dac-4f46-b643-af163fd55fde", "user@example.com", true, "John", "Doe", false, null, "USER@EXAMPLE.COM", "USER@EXAMPLE.COM", "AQAAAAIAAYagAAAAEEnIReNKuUfjZhAJIM6RCa3YuOvnFkgJAlhroO7w7p90k7KQ+xPQ4fP9mGzd3uZlvA==", null, false, "", false, "user@example.com" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
@@ -375,9 +375,6 @@ namespace InventrySystem.Migrations
                 {
                     { new Guid("14c1b3fb-57d0-48f5-aa4a-130a1ab629c0"), "Dell" },
                     { new Guid("302a431a-2f54-4768-8a34-b6414f3909df"), "Samsung" },
-                    { new Guid("38fe8b3c-1f86-424a-857f-28b3d200adc3"), "Cisco" },
-                    { new Guid("742229d4-eb49-4ded-8fc3-ee1fdf7d4157"), "Google" },
-                    { new Guid("80abbca8-664d-4b20-b5de-024705497d4a"), "Microsoft" },
                     { new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"), "Lenovo" },
                     { new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"), "Apple" },
                     { new Guid("ffb0451c-5f0b-457d-a513-e308e9b87326"), "HP" }
@@ -388,14 +385,10 @@ namespace InventrySystem.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("3ae0f960-57a5-40b3-a1b6-b21e89b037f0"), "Keyboards" },
                     { new Guid("42a2b158-1964-47da-8c4e-31a249aa1b3a"), "Printers" },
-                    { new Guid("4b8fa9a2-f4ec-46d3-80e3-b0e6c0cc0fca"), "Mice" },
                     { new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"), "Laptops" },
                     { new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"), "Desktops" },
-                    { new Guid("d3d0e04f-640e-42bc-8f47-6c65362b0905"), "Servers" },
-                    { new Guid("f26edf00-3045-400e-94b4-95c1537adfc9"), "Monitors" },
-                    { new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"), "Routers" }
+                    { new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"), "Mobile Phone" }
                 });
 
             migrationBuilder.InsertData(
@@ -405,19 +398,31 @@ namespace InventrySystem.Migrations
                 {
                     { new Guid("029e2d94-fd9d-41bd-9b4a-58b2f738c662"), "Contact info for Omega IT", "Omega IT Eswatini" },
                     { new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8"), "Contact info for CompuParts", "CompuParts Eswatini" },
-                    { new Guid("7360be35-feab-46c7-b250-bdf5f894bdc9"), "Contact info for Vuna Technologies", "Vuna Technologies" },
-                    { new Guid("915d6ff3-f98f-4430-9bdd-dd8f23107670"), "Contact info for TelPro", "TelPro Eswatini" },
-                    { new Guid("d699d296-11ea-490f-af70-925cb1859a57"), "Contact info for Cortex Technologies", "Cortex Technologies Eswatini" },
                     { new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0"), "Contact info for DataNet", "DataNet Eswatini" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "cfa9978f-2afd-4786-9cf9-97b4493f4d34", "a2bd32c0-d75e-4966-8274-758e273da3fb" });
 
             migrationBuilder.InsertData(
                 table: "Devices",
                 columns: new[] { "Id", "BrandId", "CategoryId", "IsAvailable", "IsFaulty", "Name", "SerialNumber", "SupplierId" },
                 values: new object[,]
                 {
-                    { new Guid("3cffec65-6a2c-460c-8072-60cfe692c19d"), new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"), new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"), true, false, "Laptop X1", "SN123456", new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0") },
-                    { new Guid("b764457b-84c1-46d0-8e84-42782c0f7355"), new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"), new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"), true, false, "Desktop Y2", "SN654321", new Guid("7360be35-feab-46c7-b250-bdf5f894bdc9") }
+                    { new Guid("0ab89bb9-6680-463c-b3be-ff46d35c61d3"), new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"), new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"), true, false, "Desktop Y1", "SN246810", new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0") },
+                    { new Guid("1367c7e1-0b32-41c1-ac42-5810d58c97f4"), new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"), new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"), true, false, "Desktop Y3", "SN112233", new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0") },
+                    { new Guid("1b04a8d3-7343-46b2-9103-9c777958ea6b"), new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"), new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"), true, false, "Laptop X1", "SN123456", new Guid("029e2d94-fd9d-41bd-9b4a-58b2f738c662") },
+                    { new Guid("2629dde7-e150-41c8-985b-51997d106ae6"), new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"), new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"), true, false, "Desktop Y2", "SN567890", new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0") },
+                    { new Guid("30c27f26-1984-46f5-86e3-8a8c5e59949a"), new Guid("302a431a-2f54-4768-8a34-b6414f3909df"), new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"), true, false, "Mobile Phone M1", "SN789012", new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8") },
+                    { new Guid("9fa3f1c4-e077-4858-a061-e3da2ffa7aae"), new Guid("ffb0451c-5f0b-457d-a513-e308e9b87326"), new Guid("42a2b158-1964-47da-8c4e-31a249aa1b3a"), true, false, "Printer Z1", "SN987654", new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8") },
+                    { new Guid("a71dc0c6-f89a-486f-b169-b0b3c985af17"), new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"), new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"), true, false, "Mobile Phone M3", "SN135790", new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8") },
+                    { new Guid("afd3da66-220c-4423-be70-bbe5da5ff9c6"), new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"), new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"), true, false, "Laptop X2", "SN789012", new Guid("029e2d94-fd9d-41bd-9b4a-58b2f738c662") },
+                    { new Guid("b713d4bb-b4ad-44b7-8bb7-220c047aed3a"), new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"), new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"), true, false, "Laptop X3", "SN345678", new Guid("029e2d94-fd9d-41bd-9b4a-58b2f738c662") },
+                    { new Guid("c4da5406-4a9b-41da-9989-44d18696bc0c"), new Guid("ffb0451c-5f0b-457d-a513-e308e9b87326"), new Guid("42a2b158-1964-47da-8c4e-31a249aa1b3a"), true, false, "Printer Z2", "SN456789", new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8") },
+                    { new Guid("d551203e-ef54-48ff-8807-c9e2839ebae1"), new Guid("ffb0451c-5f0b-457d-a513-e308e9b87326"), new Guid("42a2b158-1964-47da-8c4e-31a249aa1b3a"), true, false, "Printer Z3", "SN135790", new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8") },
+                    { new Guid("f2e8f4d9-60ed-4de7-a036-8760003214c9"), new Guid("302a431a-2f54-4768-8a34-b6414f3909df"), new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"), true, false, "Mobile Phone M2", "SN456789", new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8") }
                 });
 
             migrationBuilder.CreateIndex(

@@ -97,7 +97,7 @@ namespace InventrySystem.Migrations
                         {
                             Id = "a2bd32c0-d75e-4966-8274-758e273da3fb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6c19978e-d60e-411b-a239-c4b75b55772c",
+                            ConcurrencyStamp = "2ea1f06e-4dac-4f46-b643-af163fd55fde",
                             Email = "user@example.com",
                             EmailConfirmed = true,
                             FirstName = "John",
@@ -105,7 +105,7 @@ namespace InventrySystem.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@EXAMPLE.COM",
                             NormalizedUserName = "USER@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIVqPxFzNE5xilE7ywTUVt4wz1wi1Cv41ioUY2LgsFcImTLGeIy6L3qvTxMmIaVXJQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEnIReNKuUfjZhAJIM6RCa3YuOvnFkgJAlhroO7w7p90k7KQ+xPQ4fP9mGzd3uZlvA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -180,16 +180,6 @@ namespace InventrySystem.Migrations
                         },
                         new
                         {
-                            Id = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
-                            Name = "Microsoft"
-                        },
-                        new
-                        {
-                            Id = new Guid("742229d4-eb49-4ded-8fc3-ee1fdf7d4157"),
-                            Name = "Google"
-                        },
-                        new
-                        {
                             Id = new Guid("302a431a-2f54-4768-8a34-b6414f3909df"),
                             Name = "Samsung"
                         },
@@ -207,11 +197,6 @@ namespace InventrySystem.Migrations
                         {
                             Id = new Guid("ffb0451c-5f0b-457d-a513-e308e9b87326"),
                             Name = "HP"
-                        },
-                        new
-                        {
-                            Id = new Guid("38fe8b3c-1f86-424a-857f-28b3d200adc3"),
-                            Name = "Cisco"
                         });
                 });
 
@@ -241,33 +226,13 @@ namespace InventrySystem.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f26edf00-3045-400e-94b4-95c1537adfc9"),
-                            Name = "Monitors"
-                        },
-                        new
-                        {
-                            Id = new Guid("3ae0f960-57a5-40b3-a1b6-b21e89b037f0"),
-                            Name = "Keyboards"
-                        },
-                        new
-                        {
-                            Id = new Guid("4b8fa9a2-f4ec-46d3-80e3-b0e6c0cc0fca"),
-                            Name = "Mice"
-                        },
-                        new
-                        {
                             Id = new Guid("42a2b158-1964-47da-8c4e-31a249aa1b3a"),
                             Name = "Printers"
                         },
                         new
                         {
                             Id = new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"),
-                            Name = "Routers"
-                        },
-                        new
-                        {
-                            Id = new Guid("d3d0e04f-640e-42bc-8f47-6c65362b0905"),
-                            Name = "Servers"
+                            Name = "Mobile Phone"
                         });
                 });
 
@@ -311,25 +276,135 @@ namespace InventrySystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3cce8fb2-3102-4b91-b937-66bdd3aea592"),
+                            Id = new Guid("1b04a8d3-7343-46b2-9103-9c777958ea6b"),
                             BrandId = new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"),
                             CategoryId = new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"),
                             IsAvailable = true,
                             IsFaulty = false,
                             Name = "Laptop X1",
                             SerialNumber = "SN123456",
+                            SupplierId = new Guid("029e2d94-fd9d-41bd-9b4a-58b2f738c662")
+                        },
+                        new
+                        {
+                            Id = new Guid("afd3da66-220c-4423-be70-bbe5da5ff9c6"),
+                            BrandId = new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"),
+                            CategoryId = new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Laptop X2",
+                            SerialNumber = "SN789012",
+                            SupplierId = new Guid("029e2d94-fd9d-41bd-9b4a-58b2f738c662")
+                        },
+                        new
+                        {
+                            Id = new Guid("b713d4bb-b4ad-44b7-8bb7-220c047aed3a"),
+                            BrandId = new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"),
+                            CategoryId = new Guid("9aa0f4cd-de28-4d3c-b38b-586819845ba3"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Laptop X3",
+                            SerialNumber = "SN345678",
+                            SupplierId = new Guid("029e2d94-fd9d-41bd-9b4a-58b2f738c662")
+                        },
+                        new
+                        {
+                            Id = new Guid("0ab89bb9-6680-463c-b3be-ff46d35c61d3"),
+                            BrandId = new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"),
+                            CategoryId = new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Desktop Y1",
+                            SerialNumber = "SN246810",
                             SupplierId = new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0")
                         },
                         new
                         {
-                            Id = new Guid("4681a7c2-1e61-492a-9b24-d65d968a8e0e"),
+                            Id = new Guid("2629dde7-e150-41c8-985b-51997d106ae6"),
                             BrandId = new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"),
                             CategoryId = new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"),
                             IsAvailable = true,
                             IsFaulty = false,
                             Name = "Desktop Y2",
-                            SerialNumber = "SN654321",
-                            SupplierId = new Guid("7360be35-feab-46c7-b250-bdf5f894bdc9")
+                            SerialNumber = "SN567890",
+                            SupplierId = new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0")
+                        },
+                        new
+                        {
+                            Id = new Guid("1367c7e1-0b32-41c1-ac42-5810d58c97f4"),
+                            BrandId = new Guid("89491906-e1e3-4d90-b8da-7363d1d92518"),
+                            CategoryId = new Guid("afc1bef3-e71d-4bd8-9bb2-c838c40e9ee0"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Desktop Y3",
+                            SerialNumber = "SN112233",
+                            SupplierId = new Guid("ec98376a-b287-458c-96b8-18aef57eb9f0")
+                        },
+                        new
+                        {
+                            Id = new Guid("9fa3f1c4-e077-4858-a061-e3da2ffa7aae"),
+                            BrandId = new Guid("ffb0451c-5f0b-457d-a513-e308e9b87326"),
+                            CategoryId = new Guid("42a2b158-1964-47da-8c4e-31a249aa1b3a"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Printer Z1",
+                            SerialNumber = "SN987654",
+                            SupplierId = new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8")
+                        },
+                        new
+                        {
+                            Id = new Guid("c4da5406-4a9b-41da-9989-44d18696bc0c"),
+                            BrandId = new Guid("ffb0451c-5f0b-457d-a513-e308e9b87326"),
+                            CategoryId = new Guid("42a2b158-1964-47da-8c4e-31a249aa1b3a"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Printer Z2",
+                            SerialNumber = "SN456789",
+                            SupplierId = new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8")
+                        },
+                        new
+                        {
+                            Id = new Guid("d551203e-ef54-48ff-8807-c9e2839ebae1"),
+                            BrandId = new Guid("ffb0451c-5f0b-457d-a513-e308e9b87326"),
+                            CategoryId = new Guid("42a2b158-1964-47da-8c4e-31a249aa1b3a"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Printer Z3",
+                            SerialNumber = "SN135790",
+                            SupplierId = new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8")
+                        },
+                        new
+                        {
+                            Id = new Guid("30c27f26-1984-46f5-86e3-8a8c5e59949a"),
+                            BrandId = new Guid("302a431a-2f54-4768-8a34-b6414f3909df"),
+                            CategoryId = new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Mobile Phone M1",
+                            SerialNumber = "SN789012",
+                            SupplierId = new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8")
+                        },
+                        new
+                        {
+                            Id = new Guid("f2e8f4d9-60ed-4de7-a036-8760003214c9"),
+                            BrandId = new Guid("302a431a-2f54-4768-8a34-b6414f3909df"),
+                            CategoryId = new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Mobile Phone M2",
+                            SerialNumber = "SN456789",
+                            SupplierId = new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8")
+                        },
+                        new
+                        {
+                            Id = new Guid("a71dc0c6-f89a-486f-b169-b0b3c985af17"),
+                            BrandId = new Guid("f10323d3-da72-44e7-ae7d-0379da31b329"),
+                            CategoryId = new Guid("f8f32941-7bad-471e-9d15-07b0ed660516"),
+                            IsAvailable = true,
+                            IsFaulty = false,
+                            Name = "Mobile Phone M3",
+                            SerialNumber = "SN135790",
+                            SupplierId = new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8")
                         });
                 });
 
@@ -501,12 +576,6 @@ namespace InventrySystem.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d699d296-11ea-490f-af70-925cb1859a57"),
-                            ContactInfo = "Contact info for Cortex Technologies",
-                            Name = "Cortex Technologies Eswatini"
-                        },
-                        new
-                        {
                             Id = new Guid("3fff2d50-83f4-4128-a5dd-bb74f0d754e8"),
                             ContactInfo = "Contact info for CompuParts",
                             Name = "CompuParts Eswatini"
@@ -519,21 +588,9 @@ namespace InventrySystem.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7360be35-feab-46c7-b250-bdf5f894bdc9"),
-                            ContactInfo = "Contact info for Vuna Technologies",
-                            Name = "Vuna Technologies"
-                        },
-                        new
-                        {
                             Id = new Guid("029e2d94-fd9d-41bd-9b4a-58b2f738c662"),
                             ContactInfo = "Contact info for Omega IT",
                             Name = "Omega IT Eswatini"
-                        },
-                        new
-                        {
-                            Id = new Guid("915d6ff3-f98f-4430-9bdd-dd8f23107670"),
-                            ContactInfo = "Contact info for TelPro",
-                            Name = "TelPro Eswatini"
                         });
                 });
 
