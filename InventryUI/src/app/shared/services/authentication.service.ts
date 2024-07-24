@@ -9,7 +9,6 @@ import { ChangePasswordDto, ResetPasswordDto } from 'src/app/_interface/resetPas
 import { RegistrationResponseDto } from 'src/app/_interface/response/registrationResponseDto.model';
 import { UserForAuthenticationDto } from 'src/app/_interface/user/userForAuthenticationDto.model';
 import { UserForRegistrationDto } from 'src/app/_interface/user/userForRegistrationDto.model';
-import { CustomEncoder } from '../custom-encoder';
 
 
 
@@ -46,13 +45,6 @@ export class AuthenticationService {
 
   public changePassword = (route: string, body: ChangePasswordDto) => {
     return this.http.post(this.createCompleteRoute(route, environment.apiUrl), body);
-  }
-  public confirmEmail = (route: string, token: string, email: string) => {
-    let params = new HttpParams({ encoder: new CustomEncoder() })
-    params = params.append('token', token);
-    params = params.append('email', email);
-    
-    return this.http.get(this.createCompleteRoute(route, environment.apiUrl), { params: params });
   }
 
   public sendAuthStateChangeNotification = (isAuthenticated: boolean) => {
