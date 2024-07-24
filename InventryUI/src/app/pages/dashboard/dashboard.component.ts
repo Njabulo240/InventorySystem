@@ -1,17 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  MonthDto,
-  MonthTotalDto,
-  AuditLogDto,
-} from 'src/app/_interface/audit-log';
-import {
-  salesOverviewChart,
-} from 'src/app/_interface/chart';
-import { CustomerDto } from 'src/app/_interface/customers';
-import { UserDto } from 'src/app/_interface/user';
+import { DeviceCategoryReport } from 'src/app/_interface/device';
+
 import { RepositoryService } from 'src/app/shared/services/repository.service';
 
 @Component({
@@ -21,11 +14,26 @@ import { RepositoryService } from 'src/app/shared/services/repository.service';
 })
 export class AppDashboardComponent {
 
-  constructor(private repoService: RepositoryService) { }
+  deviceReports: DeviceCategoryReport[] = [];
+  errorMessage: string = '';
 
-  ngOnInit() {
+  constructor(private repositoryService: RepositoryService) { }
 
+  ngOnInit(): void {
+    this.getDeviceCategoryReport();
   }
 
+
+
+  public getDeviceCategoryReport = () => {
+    const addressUri: string = `api/devices/count`;
+    this.repositoryService.getData(addressUri)
+    .subscribe(res => {
+      this.deviceReports = res as DeviceCategoryReport[];
+    },
+    (error) => {
+      this.errorMessage = error.message
+    })
+  }
  
 }

@@ -1,59 +1,18 @@
-<div class="row" fxHide.xs>
-  <div class="col-sm-6 col-lg-4">
-    <mat-card class="cardWithShadow bg1">
-      <mat-card-content class="p-24 center-content">
-        <div class="row">
-          <img src="../../../assets/images/backgrounds/users.png" class="mr-8" width="80" height="80" alt="User Image">
-          <!-- User image -->
-          <div class="column">
-            <mat-card-title>
-              Users
-            </mat-card-title>
-            <div class="row m-t-24">
-              <div class="col-7">
-                <h4 class="mat-headline-5">66</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div class="col-sm-6 col-lg-4">
-    <mat-card class="cardWithShadow bg2">
-      <mat-card-content class="p-24 center-content">
-        <div class="row">
-          <img src="../../../assets/images/backgrounds/customers.png" class="mr-8" width="80" height="80"
-            alt="User Image"> <!-- User image -->
-          <div class="column">
-            <mat-card-title>Products</mat-card-title>
-            <div class="row m-t-24">
-              <div class="col-7">
-                <h4 class="mat-headline-5">88</h4>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div class="col-sm-6 col-lg-4">
-    <mat-card class="cardWithShadow bg4">
-      <mat-card-content class="p-24 center-content">
-        <div class="row">
-          <img src="../../../assets/images/backgrounds/events.png" class="mr-8" width="80" height="80" alt="User Image">
-          <!-- User image -->
-          <div class="column">
-            <mat-card-title>Fault</mat-card-title>
-            <div class="row m-t-24">
-              <div class="col-7">
-                <h4 class="mat-headline-5">89</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-content class="b-t-1">
+    <div class="row">
+      <div class="col-lg-4 col-sm-6" *ngFor="let report of deviceReports">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>{{ report.categoryName }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <p><strong>Total Devices:</strong> {{ report.totalDevices }}</p>
+            <p><strong>Available:</strong> {{ report.available }}</p>
+            <p><strong>Faulty:</strong> {{ report.faulty }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -10,4 +10,11 @@ export interface Device {
     supplierName: string;
     isFaulty: boolean;
   }
+
+  export interface DeviceCategoryReport {
+    categoryName: string;
+    totalDevices: number;
+    available: number;
+    faulty: number;
+  }
   
